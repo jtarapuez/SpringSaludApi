@@ -7,93 +7,78 @@ package iess.gen.basespringapi.infrastructure.mapper;
 import iess.gen.basespringapi.infrastructure.controller.dto.UnidadMedicaPublicResponse;
 import iess.gen.basespringapi.infrastructure.controller.dto.UnidadMedicaRequest;
 import iess.gen.basespringapi.infrastructure.controller.dto.UnidadMedicaResponse;
+import iess.gen.basespringapi.infrastructure.persistence.jpa.ProvinciaEntity;
 import iess.gen.basespringapi.infrastructure.persistence.jpa.UnidadMedicaEntity;
 import iess.gen.basespringapi.model.UnidadMedica;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * <b> Mapper centralizado para realizar las conversiones de Unidad Médica. </b>
- *
- * @author Juan Carlos Estévez Hidalgo
- * @version Revision: 1.0
- * <p>
- * [Author: Juan Carlos Estévez Hidalgo , Date: 18 jun 2026]
- * </p>
+ * Mapper centralizado para conversiones de Unidad Médica.
  */
 @Component
 public class UnidadMedicaMapper {
 
-    /**
-     * Convierte una entidad de base de datos al modelo de dominio.
-     *
-     * @param entity Entidad de persistencia.
-     * @return Modelo de dominio.
-     */
     public UnidadMedica toDomain(UnidadMedicaEntity entity) {
         if (entity == null) {
             return null;
         }
+
+        String provinciaNombre = entity.getProvincia() != null
+                ? entity.getProvincia().getNomProvincia()
+                : null;
+
         return UnidadMedica.builder()
                 .id(entity.getId())
                 .nombre(entity.getNombre())
                 .nivel(entity.getNivel())
-                .latitud(entity.getLatitud())
-                .longitud(entity.getLongitud())
+                .latitud(toDouble(entity.getLatitud()))
+                .longitud(toDouble(entity.getLongitud()))
                 .descripcion(entity.getDescripcion())
                 .telefono(entity.getTelefono())
                 .sitioWeb(entity.getSitioWeb())
                 .siglas(entity.getSiglas())
                 .direccion(entity.getDireccion())
-                .provincia(entity.getProvincia())
-                .status(entity.getStatus())
-                .createdBy(entity.getCreatedBy())
-                .createdAt(entity.getCreatedAt())
-                .updatedBy(entity.getUpdatedBy())
-                .updatedAt(entity.getUpdatedAt())
-                .deletedBy(entity.getDeletedBy())
-                .deletedAt(entity.getDeletedAt())
+                .provincia(provinciaNombre)
+                .status(entity.getEstRegistro())
+                .createdBy(entity.getUsuCreacion())
+                .createdAt(entity.getFecCreacion())
+                .updatedBy(entity.getUsuActualizacion())
+                .updatedAt(entity.getFecActualizacion())
+                .deletedBy(entity.getUsuEliminacion())
+                .deletedAt(entity.getFecEliminacion())
                 .build();
     }
 
-    /**
-     * Convierte el modelo de dominio a una entidad de persistencia.
-     *
-     * @param domain Modelo de dominio.
-     * @return Entidad de persistencia.
-     */
-    public UnidadMedicaEntity toEntity(UnidadMedica domain) {
+    public UnidadMedicaEntity toEntity(UnidadMedica domain, ProvinciaEntity provincia) {
         if (domain == null) {
             return null;
         }
+
         return UnidadMedicaEntity.builder()
                 .id(domain.getId())
+                .provincia(provincia)
                 .nombre(domain.getNombre())
                 .nivel(domain.getNivel())
-                .latitud(domain.getLatitud())
-                .longitud(domain.getLongitud())
+                .latitud(toBigDecimal(domain.getLatitud()))
+                .longitud(toBigDecimal(domain.getLongitud()))
                 .descripcion(domain.getDescripcion())
                 .telefono(domain.getTelefono())
                 .sitioWeb(domain.getSitioWeb())
                 .siglas(domain.getSiglas())
                 .direccion(domain.getDireccion())
-                .status(domain.getStatus())
-                .createdBy(domain.getCreatedBy())
-                .createdAt(domain.getCreatedAt())
-                .updatedBy(domain.getUpdatedBy())
-                .updatedAt(domain.getUpdatedAt())
-                .deletedBy(domain.getDeletedBy())
-                .deletedAt(domain.getDeletedAt())
+                .estRegistro(domain.getStatus() != null ? domain.getStatus() : "A")
+                .usuCreacion(domain.getCreatedBy())
+                .fecCreacion(domain.getCreatedAt())
+                .usuActualizacion(domain.getUpdatedBy())
+                .fecActualizacion(domain.getUpdatedAt())
+                .usuEliminacion(domain.getDeletedBy())
+                .fecEliminacion(domain.getDeletedAt())
                 .build();
     }
 
-    /**
-     * Convierte un DTO de Request a un modelo de dominio.
-     *
-     * @param request DTO con datos de entrada.
-     * @return Modelo de dominio.
-     */
     public UnidadMedica toDomain(UnidadMedicaRequest request) {
         if (request == null) {
             return null;
@@ -113,12 +98,6 @@ public class UnidadMedicaMapper {
                 .build();
     }
 
-    /**
-     * Convierte el modelo de dominio a un DTO de Response.
-     *
-     * @param domain Modelo de dominio.
-     * @return DTO con datos de salida.
-     */
     public UnidadMedicaResponse toResponse(UnidadMedica domain) {
         if (domain == null) {
             return null;
@@ -159,5 +138,13 @@ public class UnidadMedicaMapper {
                 .siglas(domain.getSiglas())
                 .direccion(domain.getDireccion())
                 .build();
+    }
+
+    private Double toDouble(BigDecimal value) {
+        return value != null ? value.doubleValue() : null;
+    }
+
+    private BigDecimal toBigDecimal(Double value) {
+        return value != null ? BigDecimal.valueOf(value) : null;
     }
 }

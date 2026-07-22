@@ -1,4 +1,4 @@
-# Perfil PostgreSQL (Fase 3) — activar con: spring.profiles.active=postgres
+# Perfil PostgreSQL — activar con: spring.profiles.active=postgres
 spring:
   config:
     activate:
@@ -9,10 +9,12 @@ spring:
     password: ${DB_PASSWORD:iess_salud_dev}
     driver-class-name: org.postgresql.Driver
   jpa:
+    open-in-view: false
     hibernate:
       ddl-auto: validate
     show-sql: false
     properties:
       hibernate:
+        default_schema: salud
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true

@@ -4,51 +4,98 @@
  */
 package iess.gen.basespringapi.infrastructure.persistence.jpa;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
- * <b> Entidad JPA para representar la persistencia de una Unidad Médica. </b>
- * (Versión inicial sin anotaciones de JPA para permitir funcionamiento Mocked).
- *
- * @author Juan Carlos Estévez Hidalgo
- * @version Revision: 1.0
- * <p>
- * [Author: Juan Carlos Estévez Hidalgo , Date: 18 jun 2026]
- * </p>
+ * Entidad JPA para unidades médicas (esquema salud).
  */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
+@Table(name = "unidades_medicas", schema = "salud")
 public class UnidadMedicaEntity {
 
+    @Id
+    @Column(name = "id_unidad", nullable = false)
     private UUID id;
-    private String nombre;
-    private Integer nivel;
-    private Double latitud;
-    private Double longitud;
-    private String descripcion;
-    private String telefono;
-    private String sitioWeb;
-    private String siglas;
-    private String direccion;
-    private String provincia;
 
-    // Campos de Auditoría
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_provincia", nullable = false)
+    private ProvinciaEntity provincia;
+
+    @Column(name = "nom_unidad", nullable = false, length = 500)
+    private String nombre;
+
+    @Column(name = "siglas", nullable = false, length = 20)
+    private String siglas;
+
+    @JdbcTypeCode(SqlTypes.SMALLINT)
+    @Column(name = "nivel", nullable = false)
+    private Integer nivel;
+
+    @Column(name = "descripcion", length = 200)
+    private String descripcion;
+
+    @Column(name = "latitud", nullable = false, precision = 10, scale = 7)
+    private BigDecimal latitud;
+
+    @Column(name = "longitud", nullable = false, precision = 10, scale = 7)
+    private BigDecimal longitud;
+
+    @Column(name = "telefono", length = 50)
+    private String telefono;
+
+    @Column(name = "sitio_web", length = 500)
+    private String sitioWeb;
+
+    @Column(name = "direccion", length = 500)
+    private String direccion;
+
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(name = "est_registro", nullable = false, length = 1)
     @Builder.Default
-    private String status = "A";
-    private String createdBy;
-    private LocalDateTime createdAt;
-    private String updatedBy;
-    private LocalDateTime updatedAt;
-    private String deletedBy;
-    private LocalDateTime deletedAt;
+    private String estRegistro = "A";
+
+    @Column(name = "usu_creacion", nullable = false, length = 50)
+    @Builder.Default
+    private String usuCreacion = "system";
+
+    @Column(name = "fec_creacion", nullable = false)
+    @Builder.Default
+    private LocalDateTime fecCreacion = LocalDateTime.now();
+
+    @Column(name = "ip_equipo", length = 45)
+    private String ipEquipo;
+
+    @Column(name = "usu_actualizacion", length = 50)
+    private String usuActualizacion;
+
+    @Column(name = "fec_actualizacion")
+    private LocalDateTime fecActualizacion;
+
+    @Column(name = "usu_eliminacion", length = 50)
+    private String usuEliminacion;
+
+    @Column(name = "fec_eliminacion")
+    private LocalDateTime fecEliminacion;
 }

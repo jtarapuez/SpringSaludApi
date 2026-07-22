@@ -7,7 +7,7 @@ spring:
   application:
     name: BaseSpringApi
   profiles:
-    active: mock
+    active: postgres
 
 app:
   data:
