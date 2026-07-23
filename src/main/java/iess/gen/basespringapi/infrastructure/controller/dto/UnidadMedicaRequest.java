@@ -14,10 +14,10 @@ import lombok.Setter;
 /**
  * <b> DTO para recibir la información al crear/actualizar una Unidad Médica. </b>
  *
- * @author Juan Carlos Estévez Hidalgo
+ * @author Juan Pablo Tarapuez
  * @version Revision: 1.0
  * <p>
- * [Author: Juan Carlos Estévez Hidalgo , Date: 18 jun 2026]
+ * [Author: Juan Pablo Tarapuez , Date: 18 jun 2026]
  * </p>
  */
 @Getter

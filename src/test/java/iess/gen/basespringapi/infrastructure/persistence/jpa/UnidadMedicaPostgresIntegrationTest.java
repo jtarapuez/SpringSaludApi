@@ -21,6 +21,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Pruebas de integración contra PostgreSQL local (iess_salud).
  * Se ejecutan solo si RUN_POSTGRES_IT=true y la BD está disponible.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ * <p>
+ * [Author: Juan Pablo Tarapuez , Date: 18 jun 2026]
+ * </p>
  */
 @SpringBootTest
 @AutoConfigureMockMvc

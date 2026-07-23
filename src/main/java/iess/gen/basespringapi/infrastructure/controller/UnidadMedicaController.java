@@ -25,6 +25,12 @@ import java.util.UUID;
 
 /**
  * Controlador REST para gestionar los endpoints de Unidades Médicas.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ * <p>
+ * [Author: Juan Pablo Tarapuez , Date: 18 jun 2026]
+ * </p>
  */
 @Slf4j
 @RestController

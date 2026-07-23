@@ -32,6 +32,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Repositorio en memoria que carga unidades médicas desde el archivo JSON embebido.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ * <p>
+ * [Author: Juan Pablo Tarapuez , Date: 18 jun 2026]
+ * </p>
  */
 @Slf4j
 @Repository
