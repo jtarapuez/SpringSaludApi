@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * <b> DTO para retornar la información detallada de una Unidad Médica. </b>
@@ -30,7 +29,7 @@ import java.util.UUID;
 @Builder
 public class UnidadMedicaResponse {
 
-    private UUID id;
+    private Long id;
     private String nombre;
     private Integer nivel;
     private Double latitud;

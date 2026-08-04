@@ -22,7 +22,6 @@ import org.springframework.context.annotation.Profile;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * Entidad JPA para unidades médicas (esquema salud).
@@ -45,7 +44,7 @@ public class UnidadMedicaEntity {
 
     @Id
     @Column(name = "id_unidad", nullable = false)
-    private UUID id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_provincia", nullable = false)

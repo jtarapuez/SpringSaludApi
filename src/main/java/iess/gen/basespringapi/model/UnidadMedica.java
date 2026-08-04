@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * <b> Entidad de dominio pura para representar una Unidad Médica. </b>
@@ -30,7 +29,7 @@ import java.util.UUID;
 public class UnidadMedica {
 
     /** Identificador único de la unidad médica. */
-    private UUID id;
+    private Long id;
 
     /** Nombre de la unidad médica. */
     private String nombre;

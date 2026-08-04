@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,7 +32,7 @@ class UnidadMedicaMapperTest {
                 .nomProvincia("PICHINCHA")
                 .build();
 
-        UUID id = UUID.fromString("83e73ee2-e92a-373e-b235-b6cc1e1b2036");
+        Long id = 42L;
         UnidadMedicaEntity entity = UnidadMedicaEntity.builder()
                 .id(id)
                 .provincia(provincia)

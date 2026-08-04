@@ -5,7 +5,6 @@
 package iess.gen.basespringapi.infrastructure.mapper;
 
 import iess.gen.basespringapi.infrastructure.persistence.oracle.DirUnidadMedTpEntity;
-import iess.gen.basespringapi.infrastructure.util.UnidadMedicaIdGenerator;
 import iess.gen.basespringapi.model.UnidadMedica;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +26,7 @@ public class DirUnidadMedTpMapper {
         String siglas = entity.getSiglas();
 
         return UnidadMedica.builder()
-                .id(UnidadMedicaIdGenerator.fromSiglas(siglas, provincia, nombre))
+                .id(entity.getId())
                 .nombre(nombre)
                 .nivel(parseNivel(entity.getNivelUm()))
                 .latitud(toDouble(entity.getLatitud()))
@@ -52,6 +51,7 @@ public class DirUnidadMedTpMapper {
         }
 
         return DirUnidadMedTpEntity.builder()
+                .id(domain.getId())
                 .nombre(domain.getNombre())
                 .nivelUm(domain.getNivel() != null ? String.valueOf(domain.getNivel()) : null)
                 .latitud(toBigDecimal(domain.getLatitud()))

@@ -4,19 +4,19 @@
  */
 package iess.gen.basespringapi.infrastructure.controller;
 
+import iess.gen.basespringapi.application.dto.ProvinciaUnidadesAgrupada;
 import iess.gen.basespringapi.application.usecase.UnidadMedicaUseCase;
-import iess.gen.basespringapi.infrastructure.controller.dto.ProvinciaUnidadesPublicResponse;
-import iess.gen.basespringapi.infrastructure.controller.dto.UnidadMedicaPublicResponse;
-import iess.gen.basespringapi.infrastructure.controller.dto.UnidadMedicaResponse;
+import iess.gen.basespringapi.infrastructure.mapper.UnidadMedicaMapper;
+import iess.gen.basespringapi.model.UnidadMedica;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
-import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
@@ -32,6 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * </p>
  */
 @WebMvcTest(controllers = {UnidadMedicaController.class, HealthController.class})
+@Import(UnidadMedicaMapper.class)
 @ActiveProfiles("mock")
 class UnidadMedicaControllerTest {
 
@@ -51,10 +52,10 @@ class UnidadMedicaControllerTest {
     @Test
     void listarAgrupadas_shouldReturnProvincias() throws Exception {
         when(useCase.obtenerUnidadesAgrupadas()).thenReturn(List.of(
-                ProvinciaUnidadesPublicResponse.builder()
+                ProvinciaUnidadesAgrupada.builder()
                         .provincia("PICHINCHA")
                         .unidades(List.of(
-                                UnidadMedicaPublicResponse.builder()
+                                UnidadMedica.builder()
                                         .siglas("HCAM")
                                         .nombre("Hospital Carlos Andrade Marín")
                                         .nivel(2)
@@ -86,8 +87,8 @@ class UnidadMedicaControllerTest {
     @Test
     void buscarPorSiglas_shouldReturnUnidad() throws Exception {
         when(useCase.buscarPorSiglas("HCAM")).thenReturn(
-                UnidadMedicaResponse.builder()
-                        .id(UUID.fromString("83e73ee2-e92a-373e-b235-b6cc1e1b2036"))
+                UnidadMedica.builder()
+                        .id(1L)
                         .siglas("HCAM")
                         .nombre("Hospital Carlos Andrade Marín")
                         .nivel(2)
@@ -101,9 +102,9 @@ class UnidadMedicaControllerTest {
 
     @Test
     void buscarPorId_shouldReturnUnidad() throws Exception {
-        UUID id = UUID.fromString("83e73ee2-e92a-373e-b235-b6cc1e1b2036");
+        Long id = 1L;
         when(useCase.buscarPorId(id)).thenReturn(
-                UnidadMedicaResponse.builder()
+                UnidadMedica.builder()
                         .id(id)
                         .siglas("HCAM")
                         .build()

@@ -4,10 +4,8 @@
  */
 package iess.gen.basespringapi.application.usecase;
 
+import iess.gen.basespringapi.application.dto.ProvinciaUnidadesAgrupada;
 import iess.gen.basespringapi.application.port.UnidadMedicaRepositoryPort;
-import iess.gen.basespringapi.infrastructure.controller.dto.ProvinciaUnidadesPublicResponse;
-import iess.gen.basespringapi.infrastructure.controller.dto.UnidadMedicaResponse;
-import iess.gen.basespringapi.infrastructure.mapper.UnidadMedicaMapper;
 import iess.gen.basespringapi.model.UnidadMedica;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +15,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -41,7 +38,7 @@ class UnidadMedicaUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        useCase = new UnidadMedicaUseCase(repository, new UnidadMedicaMapper());
+        useCase = new UnidadMedicaUseCase(repository);
     }
 
     @Test
@@ -52,28 +49,29 @@ class UnidadMedicaUseCaseTest {
                 sampleUnidad("HETMC", "GUAYAS")
         ));
 
-        List<ProvinciaUnidadesPublicResponse> result = useCase.obtenerUnidadesAgrupadas();
+        List<ProvinciaUnidadesAgrupada> result = useCase.obtenerUnidadesAgrupadas();
 
         assertThat(result).hasSize(2);
         assertThat(result.get(0).getProvincia()).isEqualTo("GUAYAS");
         assertThat(result.get(1).getProvincia()).isEqualTo("PICHINCHA");
         assertThat(result.get(1).getUnidades()).hasSize(2);
+        assertThat(result.get(1).getUnidades().get(0).getSiglas()).isEqualTo("HCAM");
     }
 
     @Test
-    void buscarPorSiglas_shouldReturnMappedResponse() {
+    void buscarPorSiglas_shouldReturnDomainEntity() {
         UnidadMedica unidad = sampleUnidad("HCAM", "PICHINCHA");
         when(repository.findBySiglas("HCAM")).thenReturn(Optional.of(unidad));
 
-        UnidadMedicaResponse response = useCase.buscarPorSiglas("HCAM");
+        UnidadMedica result = useCase.buscarPorSiglas("HCAM");
 
-        assertThat(response.getSiglas()).isEqualTo("HCAM");
-        assertThat(response.getNombre()).isEqualTo("Unidad HCAM");
+        assertThat(result.getSiglas()).isEqualTo("HCAM");
+        assertThat(result.getNombre()).isEqualTo("Unidad HCAM");
     }
 
     @Test
     void buscarPorId_shouldThrowWhenNotFound() {
-        UUID id = UUID.randomUUID();
+        Long id = 99L;
         when(repository.findById(id)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> useCase.buscarPorId(id))
@@ -83,7 +81,7 @@ class UnidadMedicaUseCaseTest {
 
     private UnidadMedica sampleUnidad(String siglas, String provincia) {
         return UnidadMedica.builder()
-                .id(UUID.randomUUID())
+                .id(1L)
                 .siglas(siglas)
                 .nombre("Unidad " + siglas)
                 .nivel(2)

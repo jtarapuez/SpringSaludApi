@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * Adaptador de persistencia Oracle (DIR_UNIDADESMED_TP @ DBDVP).
@@ -37,13 +36,11 @@ public class UnidadMedicaOracleRepository implements UnidadMedicaRepositoryPort 
     }
 
     @Override
-    public Optional<UnidadMedica> findById(UUID id) {
+    public Optional<UnidadMedica> findById(Long id) {
         if (id == null) {
             return Optional.empty();
         }
-        return findAllActive().stream()
-                .filter(u -> id.equals(u.getId()))
-                .findFirst();
+        return jpaRepository.findActiveById(id).map(mapper::toDomain);
     }
 
     @Override

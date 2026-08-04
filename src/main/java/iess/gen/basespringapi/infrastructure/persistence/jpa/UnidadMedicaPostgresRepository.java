@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * Adaptador de persistencia PostgreSQL para unidades médicas (perfil postgres).
@@ -45,7 +44,7 @@ public class UnidadMedicaPostgresRepository implements UnidadMedicaRepositoryPor
     }
 
     @Override
-    public Optional<UnidadMedica> findById(UUID id) {
+    public Optional<UnidadMedica> findById(Long id) {
         return unidadMedicaJpaRepository.findActiveById(id).map(mapper::toDomain);
     }
 
@@ -80,7 +79,7 @@ public class UnidadMedicaPostgresRepository implements UnidadMedicaRepositoryPor
         UnidadMedicaEntity entity = mapper.toEntity(unidadMedica, provincia);
 
         if (entity.getId() == null) {
-            entity.setId(UUID.randomUUID());
+            entity.setId(System.currentTimeMillis());
         }
         if (entity.getEstRegistro() == null) {
             entity.setEstRegistro("A");

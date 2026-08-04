@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Profile;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * Repositorio Spring Data JPA para unidades médicas.
@@ -23,7 +22,7 @@ import java.util.UUID;
  * </p>
  */
 @Profile("postgres")
-public interface UnidadMedicaJpaRepository extends JpaRepository<UnidadMedicaEntity, UUID> {
+public interface UnidadMedicaJpaRepository extends JpaRepository<UnidadMedicaEntity, Long> {
 
     @Query("""
             SELECT u FROM UnidadMedicaEntity u
@@ -38,7 +37,7 @@ public interface UnidadMedicaJpaRepository extends JpaRepository<UnidadMedicaEnt
             JOIN FETCH u.provincia p
             WHERE u.estRegistro = 'A' AND u.id = :id
             """)
-    Optional<UnidadMedicaEntity> findActiveById(@Param("id") UUID id);
+    Optional<UnidadMedicaEntity> findActiveById(@Param("id") Long id);
 
     @Query("""
             SELECT u FROM UnidadMedicaEntity u

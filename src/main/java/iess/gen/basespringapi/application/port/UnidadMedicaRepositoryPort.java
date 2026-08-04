@@ -8,7 +8,6 @@ import iess.gen.basespringapi.model.UnidadMedica;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * Puerto de persistencia que define el contrato para el repositorio de Unidades Médicas.
@@ -23,7 +22,7 @@ public interface UnidadMedicaRepositoryPort {
 
     List<UnidadMedica> findAllActive();
 
-    Optional<UnidadMedica> findById(UUID id);
+    Optional<UnidadMedica> findById(Long id);
 
     Optional<UnidadMedica> findBySiglas(String siglas);
 

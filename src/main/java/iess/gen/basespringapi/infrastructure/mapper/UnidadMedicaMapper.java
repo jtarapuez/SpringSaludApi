@@ -4,6 +4,8 @@
  */
 package iess.gen.basespringapi.infrastructure.mapper;
 
+import iess.gen.basespringapi.application.dto.ProvinciaUnidadesAgrupada;
+import iess.gen.basespringapi.infrastructure.controller.dto.ProvinciaUnidadesPublicResponse;
 import iess.gen.basespringapi.infrastructure.controller.dto.UnidadMedicaPublicResponse;
 import iess.gen.basespringapi.infrastructure.controller.dto.UnidadMedicaRequest;
 import iess.gen.basespringapi.infrastructure.controller.dto.UnidadMedicaResponse;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Mapper centralizado para conversiones de Unidad Médica.
@@ -144,6 +147,20 @@ public class UnidadMedicaMapper {
                 .siglas(domain.getSiglas())
                 .direccion(domain.getDireccion())
                 .build();
+    }
+
+    public List<ProvinciaUnidadesPublicResponse> toPublicResponseList(List<ProvinciaUnidadesAgrupada> agrupadas) {
+        if (agrupadas == null) {
+            return List.of();
+        }
+        return agrupadas.stream()
+                .map(agrupada -> ProvinciaUnidadesPublicResponse.builder()
+                        .provincia(agrupada.getProvincia())
+                        .unidades(agrupada.getUnidades().stream()
+                                .map(this::toPublicResponse)
+                                .toList())
+                        .build())
+                .toList();
     }
 
     private Double toDouble(BigDecimal value) {

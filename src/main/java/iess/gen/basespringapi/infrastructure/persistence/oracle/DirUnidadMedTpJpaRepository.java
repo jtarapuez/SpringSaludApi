@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Repositorio Spring Data JPA para DIR_UNIDADESMED_TP.
@@ -23,6 +24,12 @@ public interface DirUnidadMedTpJpaRepository extends JpaRepository<DirUnidadMedT
             ORDER BY u.nombreProvincia, u.nombre
             """)
     List<DirUnidadMedTpEntity> findAllActive();
+
+    @Query("""
+            SELECT u FROM DirUnidadMedTpEntity u
+            WHERE u.estado = 'A' AND u.id = :id
+            """)
+    Optional<DirUnidadMedTpEntity> findActiveById(@Param("id") Long id);
 
     @Query("""
             SELECT u FROM DirUnidadMedTpEntity u

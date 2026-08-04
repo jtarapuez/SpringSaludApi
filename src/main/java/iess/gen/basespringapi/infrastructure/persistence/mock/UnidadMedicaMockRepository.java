@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import iess.gen.basespringapi.application.port.UnidadMedicaRepositoryPort;
 import iess.gen.basespringapi.infrastructure.config.AppProperties;
 import iess.gen.basespringapi.infrastructure.util.ProvinciaNormalizer;
-import iess.gen.basespringapi.infrastructure.util.UnidadMedicaIdGenerator;
 import iess.gen.basespringapi.model.UnidadMedica;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +26,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Repositorio en memoria que carga unidades médicas desde el archivo JSON embebido.
@@ -49,7 +48,8 @@ public class UnidadMedicaMockRepository implements UnidadMedicaRepositoryPort {
     private final ResourceLoader resourceLoader;
     private final ObjectMapper objectMapper;
 
-    private final Map<UUID, UnidadMedica> storage = new ConcurrentHashMap<>();
+    private final Map<Long, UnidadMedica> storage = new ConcurrentHashMap<>();
+    private final AtomicLong nextId = new AtomicLong(1);
 
     @PostConstruct
     public void loadData() {
@@ -73,20 +73,18 @@ public class UnidadMedicaMockRepository implements UnidadMedicaRepositoryPort {
                 List<Map<String, Object>> unidadesList = castUnidades(provMap.get("unidades"));
 
                 for (Map<String, Object> unidadMap : unidadesList) {
-                    String siglas = (String) unidadMap.get("siglas");
-                    String nombre = (String) unidadMap.get("nombre");
-                    UUID id = UnidadMedicaIdGenerator.fromSiglas(siglas, provincia, nombre);
+                    Long id = nextId.getAndIncrement();
 
                     UnidadMedica unidad = UnidadMedica.builder()
                             .id(id)
-                            .nombre(nombre)
+                            .nombre((String) unidadMap.get("nombre"))
                             .nivel((Integer) unidadMap.get("nivel"))
                             .latitud(toDouble(unidadMap.get("latitud")))
                             .longitud(toDouble(unidadMap.get("longitud")))
                             .descripcion((String) unidadMap.get("descripcion"))
                             .telefono((String) unidadMap.get("telefono"))
                             .sitioWeb((String) unidadMap.get("sitio_web"))
-                            .siglas(siglas)
+                            .siglas((String) unidadMap.get("siglas"))
                             .direccion((String) unidadMap.get("direccion"))
                             .provincia(provincia)
                             .status("A")
@@ -113,7 +111,7 @@ public class UnidadMedicaMockRepository implements UnidadMedicaRepositoryPort {
     }
 
     @Override
-    public Optional<UnidadMedica> findById(UUID id) {
+    public Optional<UnidadMedica> findById(Long id) {
         return Optional.ofNullable(storage.get(id)).filter(this::isActive);
     }
 
@@ -150,8 +148,7 @@ public class UnidadMedicaMockRepository implements UnidadMedicaRepositoryPort {
     @Override
     public UnidadMedica save(UnidadMedica unidadMedica) {
         if (unidadMedica.getId() == null) {
-            unidadMedica.setId(UnidadMedicaIdGenerator.fromSiglas(
-                    unidadMedica.getSiglas(), unidadMedica.getProvincia(), unidadMedica.getNombre()));
+            unidadMedica.setId(nextId.getAndIncrement());
         }
         storage.put(unidadMedica.getId(), unidadMedica);
         return unidadMedica;
