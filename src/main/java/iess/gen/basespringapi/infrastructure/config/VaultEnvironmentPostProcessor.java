@@ -120,7 +120,7 @@ public class VaultEnvironmentPostProcessor implements EnvironmentPostProcessor {
         }
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private void leerSecreto(VaultTemplate vaultTemplate, String path,
                              Map<String, String> mapaClave,
                              Map<String, Object> secretos) {
