@@ -58,15 +58,17 @@ public class UnidadMedicaOracleRepository implements UnidadMedicaRepositoryPort 
 
     @Override
     public List<UnidadMedica> search(String termino, String provincia, Integer nivel) {
-        String normalizedProvincia = normalizeProvinciaFilter(provincia);
+        String provinciaFiltro = provincia != null && !provincia.isBlank() ? provincia.trim() : null;
         String normalizedTermino = termino != null ? termino.trim() : null;
         if (normalizedTermino != null && normalizedTermino.isBlank()) {
             normalizedTermino = null;
         }
         String nivelStr = nivel != null ? String.valueOf(nivel) : null;
 
-        return jpaRepository.searchActive(normalizedTermino, normalizedProvincia, nivel, nivelStr).stream()
+        return jpaRepository.searchActive(normalizedTermino, null, nivel, nivelStr).stream()
                 .map(mapper::toDomain)
+                .filter(u -> provinciaFiltro == null
+                        || ProvinciaNormalizer.matches(u.getProvincia(), provinciaFiltro))
                 .toList();
     }
 
@@ -81,12 +83,5 @@ public class UnidadMedicaOracleRepository implements UnidadMedicaRepositoryPort 
             entity.setUsuCreacion("API");
         }
         return mapper.toDomain(jpaRepository.save(entity));
-    }
-
-    private String normalizeProvinciaFilter(String provincia) {
-        if (provincia == null || provincia.isBlank()) {
-            return null;
-        }
-        return ProvinciaNormalizer.normalize(provincia);
     }
 }
