@@ -36,7 +36,7 @@
         "direccion": "Moraspungo y Pinllopata"
       },
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa  Sangolquì",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día  Sangolquí",
         "nivel": 2,
         "latitud": -0.3371986326962608,
         "longitud": -78.44085813455243,
@@ -47,7 +47,7 @@
         "direccion": "García Moreno y Pichincha esquina"
       },
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa Central Quito",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día Central Quito",
         "nivel": 1,
         "latitud": -0.0907445,
         "longitud": -78.475602,
@@ -58,7 +58,7 @@
         "direccion": "Benalcázar N8-12 y  Manabí"
       },
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa Chimbacalle",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día Chimbacalle",
         "nivel": 1,
         "latitud": -0.2446974,
         "longitud": -78.5136295,
@@ -69,7 +69,7 @@
         "direccion": "Av. Napo E-164 y Casitagua"
       },
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa Cotocollao",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día Cotocollao",
         "nivel": 1,
         "latitud": -0.137695,
         "longitud": -78.4927812,
@@ -80,7 +80,7 @@
         "direccion": "Av. La Prensa N55-118 y Pulida"
       },
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa El Batàn",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día El Batán",
         "nivel": 1,
         "latitud": -0.1621421,
         "longitud": -78.4733919,
@@ -91,7 +91,7 @@
         "direccion": "Av. de las Palmeras y Río Coca"
       },
       {
-        "nombre": "Centro Mèdico Familiar integral  y Especialidades, Diàlisis La Mariscal",
+        "nombre": "Centro Médico Familiar integral  y Especialidades, Diálisis La Mariscal",
         "nivel": 2,
         "latitud": -0.2019085,
         "longitud": -78.4877323,
@@ -102,7 +102,7 @@
         "direccion": "Av . Colon y Diego de Almagro"
       },
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa Eloy Alfaro",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día Eloy Alfaro",
         "nivel": 2,
         "latitud": -0.1948085,
         "longitud": -78.4941356,
@@ -288,7 +288,7 @@
         "direccion": "Gonzalo Aparicio y Guillermo Davis"
       },
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa Efren Jurado Lopez",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día Efren Jurado Lopez",
         "nivel": 2,
         "latitud": -2.2084413265073,
         "longitud": -79.88532074516755,
@@ -299,7 +299,7 @@
         "direccion": "Chile 2816 y Colombia"
       },
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa Norte Tarqui",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día Norte Tarqui",
         "nivel": 2,
         "latitud": -0.2557517,
         "longitud": -78.5529021,
@@ -310,7 +310,7 @@
         "direccion": "Av. Juan Tanca Marengo Km. 6,5\r\nFrente Colegio Americano"
       },
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa Sur Valdivia",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día Sur Valdivia",
         "nivel": 1,
         "latitud": -2.2457869,
         "longitud": -79.8947836,
@@ -321,7 +321,7 @@
         "direccion": "25 de Julio y Calle Napo"
       },
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa Maria Rosa Parra Arreaga",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día Maria Rosa Parra Arreaga",
         "nivel": 2,
         "latitud": -1.9605641890530698,
         "longitud": -79.72663786236751,
@@ -593,7 +593,7 @@
         "direccion": "Junín y Boyacá"
       },
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa Jipijapa",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día Jipijapa",
         "nivel": 2,
         "latitud": -1.3526039,
         "longitud": -80.584733,
@@ -686,7 +686,7 @@
         "direccion": "Av. Nueva Loja y Calle Ibarra"
       },
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa Central Loja",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día Central Loja",
         "nivel": 2,
         "latitud": -3.9953717,
         "longitud": -79.2017615,
@@ -784,7 +784,7 @@
         "direccion": "Av. Río Lelia y calle Tumbecinos"
       },
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa Santo Domingo",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día Santo Domingo",
         "nivel": 2,
         "latitud": -0.20578794259856922,
         "longitud": -78.51308923981766,
@@ -870,7 +870,7 @@
     "provincia": "NAPO",
     "unidades": [
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa  El Tena",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día  El Tena",
         "nivel": 2,
         "latitud": -1.0114606,
         "longitud": -77.8097684,
@@ -886,7 +886,7 @@
     "provincia": "CAÑAR",
     "unidades": [
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa Azogues",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día Azogues",
         "nivel": 2,
         "latitud": -2.736882431685333,
         "longitud": -78.8407015586574,
@@ -935,7 +935,7 @@
     "provincia": "MORONA SANTIAGO",
     "unidades": [
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa Macas",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día Macas",
         "nivel": 2,
         "latitud": -2.2827155,
         "longitud": -78.1247473,
@@ -973,7 +973,7 @@
     "provincia": "ZAMORA",
     "unidades": [
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa Zamora",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día Zamora",
         "nivel": 2,
         "latitud": -4.0657634,
         "longitud": -78.9526582,
@@ -1005,7 +1005,7 @@
     "provincia": "CARCHI",
     "unidades": [
       {
-        "nombre": "Centro Clìnico Quirùrgico Ambulatorio Hospital del Dìa Tulcán",
+        "nombre": "Centro Clínico Quirúrgico Ambulatorio Hospital del Día Tulcán",
         "nivel": 1,
         "latitud": 0.8168151,
         "longitud": -77.7210199,

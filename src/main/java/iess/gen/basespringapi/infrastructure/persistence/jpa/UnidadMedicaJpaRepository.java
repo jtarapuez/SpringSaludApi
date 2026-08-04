@@ -7,6 +7,7 @@ package iess.gen.basespringapi.infrastructure.persistence.jpa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.context.annotation.Profile;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import java.util.UUID;
  * [Author: Juan Pablo Tarapuez , Date: 18 jun 2026]
  * </p>
  */
+@Profile("postgres")
 public interface UnidadMedicaJpaRepository extends JpaRepository<UnidadMedicaEntity, UUID> {
 
     @Query("""

@@ -14,15 +14,22 @@ API REST Spring Boot para el proyecto de salud IESS: unidades médicas, geolocal
 
 | Perfil | Uso |
 |--------|-----|
-| `postgres` | **Por defecto.** Conexión a PostgreSQL `iess_salud` (esquema `salud`) |
+| `oracle` | **Por defecto.** Conexión a Oracle DBDVP `DIRGEN_OWNER` (`DIR_UNIDADESMED_TP`) |
+| `postgres` | PostgreSQL `iess_salud` (esquema `salud`) |
 | `mock` | Datos en memoria desde JSON (desarrollo sin BD) |
 
 ## Ejecución
 
-Con PostgreSQL (recomendado):
+Con Oracle DBDVP (recomendado):
 
 ```bash
 mvn spring-boot:run
+```
+
+Con PostgreSQL local:
+
+```bash
+mvn spring-boot:run -Dspring-boot.run.profiles=postgres
 ```
 
 Solo con JSON en memoria:
@@ -31,7 +38,9 @@ Solo con JSON en memoria:
 mvn spring-boot:run -Dspring-boot.run.profiles=mock
 ```
 
-Variables opcionales: `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`.
+Variables opcionales Oracle: `DB_HOST`, `DB_PORT`, `DB_SERVICE`, `DB_USER`, `DB_PASSWORD`.
+
+Variables opcionales PostgreSQL: `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`.
 
 ## Endpoints principales
 
@@ -45,6 +54,16 @@ Variables opcionales: `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`.
 Swagger UI: `http://localhost:8080/api/swagger-ui/index.html`
 
 ## Base de datos
+
+### Oracle DBDVP (perfil `oracle`)
+
+```
+jdbc:oracle:thin:@192.168.29.66:1521/DBDVP
+usuario: DIRGEN_OWNER
+tabla: DIR_UNIDADESMED_TP (101 unidades médicas)
+```
+
+### PostgreSQL local (perfil `postgres`)
 
 Scripts en `src/main/resources/db/`:
 
@@ -78,6 +97,7 @@ RUN_POSTGRES_IT=true mvn test -Dtest=UnidadMedicaPostgresIntegrationTest
 
 ```
 Controller → UseCase → RepositoryPort
+                           ├── UnidadMedicaOracleRepository (oracle)
                            ├── UnidadMedicaPostgresRepository (postgres)
                            └── UnidadMedicaMockRepository (mock)
 ```

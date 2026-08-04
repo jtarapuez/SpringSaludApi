@@ -6,6 +6,7 @@ package iess.gen.basespringapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 /**
  * <b> Clase principal de arranque para la API Base de Spring Boot. </b>
@@ -17,6 +18,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * </p>
  */
 @SpringBootApplication
+@EntityScan(basePackages = "iess.gen.basespringapi.infrastructure.persistence.placeholder")
 public class BaseSpringApiApplication {
 
     public static void main(String[] args) {

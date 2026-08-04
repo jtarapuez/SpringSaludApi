@@ -7,7 +7,7 @@ spring:
   application:
     name: BaseSpringApi
   profiles:
-    active: postgres
+    active: oracle
 
 app:
   data:

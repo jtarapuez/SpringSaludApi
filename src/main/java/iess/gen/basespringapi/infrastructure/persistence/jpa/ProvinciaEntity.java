@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.springframework.context.annotation.Profile;
 
 import java.time.LocalDateTime;
 
@@ -36,6 +37,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "provincias", schema = "salud")
+@Profile("postgres")
 public class ProvinciaEntity {
 
     @Id

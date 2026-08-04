@@ -4,6 +4,7 @@
  */
 package iess.gen.basespringapi.infrastructure.persistence.jpa;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -17,6 +18,7 @@ import java.util.Optional;
  * [Author: Juan Pablo Tarapuez , Date: 18 jun 2026]
  * </p>
  */
+@Profile("postgres")
 public interface ProvinciaJpaRepository extends JpaRepository<ProvinciaEntity, Integer> {
 
     Optional<ProvinciaEntity> findByNomProvinciaIgnoreCaseAndEstRegistro(String nomProvincia, String estRegistro);

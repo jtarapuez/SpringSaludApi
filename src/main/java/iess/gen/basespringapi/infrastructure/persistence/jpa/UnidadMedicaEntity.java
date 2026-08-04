@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.springframework.context.annotation.Profile;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -39,6 +40,7 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "unidades_medicas", schema = "salud")
+@Profile("postgres")
 public class UnidadMedicaEntity {
 
     @Id
