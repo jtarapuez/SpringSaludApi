@@ -1,18 +1,18 @@
-# Perfil Oracle DBDVP — activar con: spring.profiles.active=oracle
+# Perfil Oracle DBDVP — activo cuando DB_ENGINE=oracle
 spring:
   config:
     activate:
       on-profile: oracle
   datasource:
-    url: jdbc:oracle:thin:@${DB_HOST:192.168.29.66}:${DB_PORT:1521}/${DB_SERVICE:DBDVP}
-    username: ${DB_USER:DIRGEN_OWNER}
-    password: ${DB_PASSWORD:pruebas}
+    url: jdbc:oracle:thin:@${DB_ORACLE_HOST:${DB_HOST:192.168.29.66}}:${DB_ORACLE_PORT:${DB_PORT:1521}}/${DB_ORACLE_SERVICE:${DB_SERVICE:DBDVP}}
+    username: ${DB_ORACLE_USERNAME:${DB_USER:DIRGEN_OWNER}}
+    password: ${DB_ORACLE_PASSWORD:${DB_PASSWORD:}}
     driver-class-name: oracle.jdbc.OracleDriver
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: validate
-    show-sql: false
+      ddl-auto: ${DB_ORACLE_DDL_AUTO:validate}
+    show-sql: ${DB_ORACLE_SHOW_SQL:false}
     properties:
       hibernate:
         default_schema: DIRGEN_OWNER

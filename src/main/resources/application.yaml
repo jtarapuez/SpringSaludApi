@@ -1,13 +1,33 @@
+# BaseSpringApi — configuración principal
+# Motor: DB_ENGINE=oracle | postgres | mock (ver .env.example)
+
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
   servlet:
-    context-path: /api
+    context-path: ${SERVER_CONTEXT_PATH:/api}
 
 spring:
   application:
     name: BaseSpringApi
   profiles:
-    active: oracle
+    active: ${DB_ENGINE:oracle}
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when_authorized
+  health:
+    mongo:
+      enabled: false
 
 app:
   data:
@@ -19,8 +39,10 @@ app:
 
 springdoc:
   api-docs:
+    enabled: ${SWAGGER_ENABLED:true}
     path: /v3/api-docs
   swagger-ui:
+    enabled: ${SWAGGER_ENABLED:true}
     path: /swagger-ui.html
     operations-sorter: method
     tags-sorter: alpha

@@ -1,0 +1,38 @@
+# ============================================================
+#  BaseSpringApi - Solo la aplicación (API)
+#
+#  Oracle DBDVP = externo (192.168.29.66) — no requiere utilitarios.
+#  Utilitarios (Vault, Postgres, Mongo, MinIO) = opcionales:
+#    docker-compose -f docker-compose-utilitarios.yml up -d
+#
+#  Uso:
+#    docker-compose up -d --build
+#    docker-compose logs -f
+#    docker-compose down
+# ============================================================
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: base-spring-api:1.0.0
+    container_name: base_spring_app
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    volumes:
+      - app_uploads:/app/uploads
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/api/actuator/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  app_uploads:
+    name: base_spring_uploads

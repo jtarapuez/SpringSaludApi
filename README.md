@@ -18,29 +18,77 @@ API REST Spring Boot para el proyecto de salud IESS: unidades médicas, geolocal
 | `postgres` | PostgreSQL `iess_salud` (esquema `salud`) |
 | `mock` | Datos en memoria desde JSON (desarrollo sin BD) |
 
+## Configuración del entorno (PAS-EST-055)
+
+### Etapa 1 — Variables `.env`
+
+```bash
+cp .env.example .env
+# Completar DB_ORACLE_PASSWORD (o DB_POSTGRES_PASSWORD según motor)
+```
+
+| Variable | Descripción |
+|----------|-------------|
+| `DB_ENGINE` | `oracle` (default), `postgres` o `mock` |
+| `DB_ORACLE_*` | Conexión Oracle DBDVP |
+| `DB_POSTGRES_*` | Conexión PostgreSQL local |
+
+### Etapa 2 — Vault y Docker
+
+| Variable | Descripción |
+|----------|-------------|
+| `VAULT_ENABLED` | `true` para cargar secretos desde HashiCorp Vault |
+| `VAULT_HOST`, `VAULT_PORT`, `VAULT_TOKEN` | Conexión Vault local (`root-token` en dev) |
+| `MONGO_ENABLED` | `true` para auditoría Mongo (Etapa 3) |
+
+**Utilitarios locales (PostgreSQL, Mongo, Vault, MinIO):**
+
+```bash
+docker-compose -f docker-compose-utilitarios.yml up -d
+docker-compose -f docker-compose-utilitarios.yml up vault-init
+```
+
+**Arranque con Vault:**
+
+```bash
+# .env: VAULT_ENABLED=true, VAULT_TOKEN=root-token
+mvn spring-boot:run
+```
+
+**App dockerizada (modo liviano — solo API, Oracle externo):**
+
+```bash
+# Validar puertos primero
+.cursor/skills/lev-basespringapi-docker/scripts/check-ports.sh
+
+# Levantar
+docker-compose up -d --build
+```
+
+Documentación completa: [`Documentacion/DOCKER_BASESPRINGAPI.md`](../Documentacion/DOCKER_BASESPRINGAPI.md)  
+Paso a calidad (Vault/DNTSI): [`Documentacion/PASO_A_CALIDAD_VAULT_DNTSI.md`](../Documentacion/PASO_A_CALIDAD_VAULT_DNTSI.md)  
+Skill de arranque: `.cursor/skills/lev-basespringapi-docker/`
+
 ## Ejecución
 
 Con Oracle DBDVP (recomendado):
 
 ```bash
+# .env con DB_ENGINE=oracle y DB_ORACLE_PASSWORD=...
 mvn spring-boot:run
 ```
 
 Con PostgreSQL local:
 
 ```bash
-mvn spring-boot:run -Dspring-boot.run.profiles=postgres
+DB_ENGINE=postgres mvn spring-boot:run
 ```
 
 Solo con JSON en memoria:
 
 ```bash
-mvn spring-boot:run -Dspring-boot.run.profiles=mock
+DB_ENGINE=mock mvn spring-boot:run
 ```
-
-Variables opcionales Oracle: `DB_HOST`, `DB_PORT`, `DB_SERVICE`, `DB_USER`, `DB_PASSWORD`.
-
-Variables opcionales PostgreSQL: `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`.
 
 ## Endpoints principales
 
@@ -94,6 +142,8 @@ RUN_POSTGRES_IT=true mvn test -Dtest=UnidadMedicaPostgresIntegrationTest
 ```
 
 ## Arquitectura (PAS-EST-055)
+
+Ver plan de alineación con plantilla: [`Documentacion/PLAN_ALINEACION_PAS-EST-055.md`](../Documentacion/PLAN_ALINEACION_PAS-EST-055.md)
 
 ```
 Controller → UseCase → RepositoryPort

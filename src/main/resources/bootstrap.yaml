@@ -1,0 +1,21 @@
+# Bootstrap — Vault (se carga antes que application.yaml)
+# VAULT_ENABLED=false → arranque con valores del .env local
+spring:
+  cloud:
+    vault:
+      enabled: ${VAULT_ENABLED:false}
+      host: ${VAULT_HOST:localhost}
+      port: ${VAULT_PORT:8200}
+      scheme: ${VAULT_SCHEME:http}
+      authentication: TOKEN
+      token: ${VAULT_TOKEN:root-token}
+      kv:
+        enabled: true
+        backend: BaseSpringApi
+        default-context: ""
+        application-name: ""
+        profiles-path: ""
+      generic:
+        enabled: false
+  config:
+    import: "optional:vault://"
