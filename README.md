@@ -7,7 +7,7 @@ API REST Spring Boot para el proyecto de salud IESS: unidades médicas, geolocal
 - Java 21
 - Spring Boot 3.2.5
 - Spring Data JPA
-- PostgreSQL
+- Oracle DBDVP (`DIR_UNIDADESMED_TP`)
 - SpringDoc OpenAPI (Swagger)
 
 ## Perfiles
@@ -15,8 +15,7 @@ API REST Spring Boot para el proyecto de salud IESS: unidades médicas, geolocal
 | Perfil | Uso |
 |--------|-----|
 | `oracle` | **Por defecto.** Conexión a Oracle DBDVP `DIRGEN_OWNER` (`DIR_UNIDADESMED_TP`) |
-| `postgres` | PostgreSQL `iess_salud` (esquema `salud`) |
-| `mock` | Datos en memoria desde JSON (desarrollo sin BD) |
+| `mock` | Datos en memoria desde JSON (desarrollo/tests sin BD) |
 
 ## Configuración del entorno (PAS-EST-055)
 
@@ -24,14 +23,13 @@ API REST Spring Boot para el proyecto de salud IESS: unidades médicas, geolocal
 
 ```bash
 cp .env.example .env
-# Completar DB_ORACLE_PASSWORD (o DB_POSTGRES_PASSWORD según motor)
+# Completar DB_ORACLE_PASSWORD
 ```
 
 | Variable | Descripción |
 |----------|-------------|
-| `DB_ENGINE` | `oracle` (default), `postgres` o `mock` |
+| `DB_ENGINE` | `oracle` (default) o `mock` |
 | `DB_ORACLE_*` | Conexión Oracle DBDVP |
-| `DB_POSTGRES_*` | Conexión PostgreSQL local |
 
 ### Etapa 2 — Vault y Docker
 
@@ -41,7 +39,7 @@ cp .env.example .env
 | `VAULT_HOST`, `VAULT_PORT`, `VAULT_TOKEN` | Conexión Vault local (`root-token` en dev) |
 | `MONGO_ENABLED` | `true` para auditoría Mongo (Etapa 3) |
 
-**Utilitarios locales (PostgreSQL, Mongo, Vault, MinIO):**
+**Utilitarios locales (Mongo, Vault, MinIO):**
 
 ```bash
 docker-compose -f docker-compose-utilitarios.yml up -d
@@ -78,12 +76,6 @@ Con Oracle DBDVP (recomendado):
 mvn spring-boot:run
 ```
 
-Con PostgreSQL local:
-
-```bash
-DB_ENGINE=postgres mvn spring-boot:run
-```
-
 Solo con JSON en memoria:
 
 ```bash
@@ -111,34 +103,12 @@ usuario: DIRGEN_OWNER
 tabla: DIR_UNIDADESMED_TP (101 unidades médicas)
 ```
 
-### PostgreSQL local (perfil `postgres`)
-
-Scripts en `src/main/resources/db/`:
-
-1. `01_create_database.sql`
-2. `02_schema.sql`
-3. `03_seed_provincias.sql`
-4. `04_seed_unidades_medicas.sql`
-
-Conexión por defecto:
-
-```
-jdbc:postgresql://localhost:5432/iess_salud?currentSchema=salud
-usuario: iess_salud_user
-```
-
 ## Tests
 
 Unitarios y de controlador (perfil mock):
 
 ```bash
 mvn test
-```
-
-Integración con PostgreSQL local:
-
-```bash
-RUN_POSTGRES_IT=true mvn test -Dtest=UnidadMedicaPostgresIntegrationTest
 ```
 
 ## Arquitectura (PAS-EST-055)
@@ -148,6 +118,5 @@ Ver plan de alineación con plantilla: [`Documentacion/PLAN_ALINEACION_PAS-EST-0
 ```
 Controller → UseCase → RepositoryPort
                            ├── UnidadMedicaOracleRepository (oracle)
-                           ├── UnidadMedicaPostgresRepository (postgres)
                            └── UnidadMedicaMockRepository (mock)
 ```

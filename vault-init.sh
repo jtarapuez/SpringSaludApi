@@ -19,15 +19,6 @@ echo '========================================'
 
 vault secrets enable -path=BaseSpringApi kv-v2 2>/dev/null || echo 'KV ya habilitado'
 
-# ── PostgreSQL (desarrollo local) ───────────────────────────
-vault kv put BaseSpringApi/database/postgres \
-  host=$HOST \
-  port=5432 \
-  username=iess_salud_user \
-  password=postgres \
-  bdd=iess_salud
-echo '[OK] BaseSpringApi/database/postgres'
-
 # ── Oracle DBDVP (institucional — host externo) ───────────────
 vault kv put BaseSpringApi/database/oracle \
   host=192.168.29.66 \
@@ -60,7 +51,6 @@ echo '========================================'
 
 echo ''
 echo '--- Verificacion de secretos ---'
-vault kv get BaseSpringApi/database/postgres
 vault kv get BaseSpringApi/database/oracle
 vault kv get BaseSpringApi/database/mongo
 vault kv get BaseSpringApi/storage/minio

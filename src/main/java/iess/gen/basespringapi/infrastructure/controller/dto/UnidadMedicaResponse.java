@@ -4,12 +4,11 @@
  */
 package iess.gen.basespringapi.infrastructure.controller.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
@@ -25,23 +24,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class UnidadMedicaResponse {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
+public class UnidadMedicaResponse extends UnidadMedicaCamposDto {
 
     private Long id;
-    private String nombre;
-    private Integer nivel;
-    private Double latitud;
-    private Double longitud;
-    private String descripcion;
-    private String telefono;
-
-    @JsonProperty("sitio_web")
-    private String sitioWeb;
-
-    private String siglas;
-    private String direccion;
 
     // ── Campos de Auditoría ────────────────────────
     private String status;

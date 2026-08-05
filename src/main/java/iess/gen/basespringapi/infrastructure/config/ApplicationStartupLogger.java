@@ -40,15 +40,6 @@ public class ApplicationStartupLogger {
     @Value("${DB_ORACLE_SERVICE:}")
     private String oracleService;
 
-    @Value("${DB_POSTGRES_HOST:localhost}")
-    private String postgresHost;
-
-    @Value("${DB_POSTGRES_PORT:5432}")
-    private String postgresPort;
-
-    @Value("${DB_POSTGRES_NAME:iess_salud}")
-    private String postgresName;
-
     @Value("${app.data.json-path:classpath:data/unidades-medicas.json}")
     private String mockJsonPath;
 
@@ -97,10 +88,6 @@ public class ApplicationStartupLogger {
         String perfil = perfilActivo();
         if ("mock".equalsIgnoreCase(perfil)) {
             return "BD Relacional : MOCK      | JSON en memoria | " + mockJsonPath;
-        }
-        if ("postgres".equalsIgnoreCase(perfil)) {
-            String detalle = postgresHost + ":" + postgresPort + "/" + postgresName;
-            return "BD Relacional : POSTGRES  | " + tipoHost(postgresHost) + "  | " + detalle;
         }
         String host = oracleHost != null && !oracleHost.isBlank() ? oracleHost : "(configurar DB_ORACLE_HOST)";
         String service = oracleService != null && !oracleService.isBlank() ? oracleService : "DBDVP";

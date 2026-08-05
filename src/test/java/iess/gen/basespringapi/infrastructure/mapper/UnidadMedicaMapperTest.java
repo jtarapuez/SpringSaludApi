@@ -4,12 +4,12 @@
  */
 package iess.gen.basespringapi.infrastructure.mapper;
 
-import iess.gen.basespringapi.infrastructure.persistence.jpa.ProvinciaEntity;
-import iess.gen.basespringapi.infrastructure.persistence.jpa.UnidadMedicaEntity;
+import iess.gen.basespringapi.infrastructure.controller.dto.UnidadMedicaPublicResponse;
+import iess.gen.basespringapi.infrastructure.controller.dto.UnidadMedicaRequest;
+import iess.gen.basespringapi.infrastructure.controller.dto.UnidadMedicaResponse;
 import iess.gen.basespringapi.model.UnidadMedica;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,48 +26,55 @@ class UnidadMedicaMapperTest {
     private final UnidadMedicaMapper mapper = new UnidadMedicaMapper();
 
     @Test
-    void toDomain_shouldMapEntityWithProvincia() {
-        ProvinciaEntity provincia = ProvinciaEntity.builder()
-                .id(1)
-                .nomProvincia("PICHINCHA")
+    void toDomain_shouldMapRequest() {
+        UnidadMedicaRequest request = UnidadMedicaRequest.builder()
+                .nombre("Hospital Test")
+                .siglas("HT")
+                .nivel(1)
+                .latitud(-0.1)
+                .longitud(-78.4)
+                .descripcion("I NIVEL")
+                .telefono("02-0000000")
+                .sitioWeb("https://example.iess.gob.ec/")
+                .direccion("Calle Test")
                 .build();
 
-        Long id = 42L;
-        UnidadMedicaEntity entity = UnidadMedicaEntity.builder()
-                .id(id)
-                .provincia(provincia)
-                .nombre("HOSPITAL DE ESPECIALIDADES - CARLOS ANDRADE MARÍN")
-                .siglas("HCAM")
-                .nivel(2)
-                .descripcion("III NIVEL")
-                .latitud(new BigDecimal("-0.2051303"))
-                .longitud(new BigDecimal("-78.5048297"))
-                .telefono("02-2564939")
-                .sitioWeb("https://hcam.iess.gob.ec/")
-                .direccion("18 de Septiembre N19-63")
-                .estRegistro("A")
-                .usuCreacion("system")
-                .fecCreacion(LocalDateTime.of(2026, 1, 1, 0, 0))
-                .build();
+        UnidadMedica domain = mapper.toDomain(request);
 
-        UnidadMedica domain = mapper.toDomain(entity);
-
-        assertThat(domain.getId()).isEqualTo(id);
-        assertThat(domain.getProvincia()).isEqualTo("PICHINCHA");
-        assertThat(domain.getSiglas()).isEqualTo("HCAM");
-        assertThat(domain.getLatitud()).isEqualTo(-0.2051303);
-        assertThat(domain.getLongitud()).isEqualTo(-78.5048297);
+        assertThat(domain.getNombre()).isEqualTo("Hospital Test");
+        assertThat(domain.getSiglas()).isEqualTo("HT");
+        assertThat(domain.getNivel()).isEqualTo(1);
         assertThat(domain.getStatus()).isEqualTo("A");
+        assertThat(domain.getCreatedAt()).isNotNull();
     }
 
     @Test
-    void toEntity_shouldMapDomainWithProvincia() {
-        ProvinciaEntity provincia = ProvinciaEntity.builder()
-                .id(1)
-                .nomProvincia("PICHINCHA")
+    void toResponse_shouldMapDomain() {
+        Long id = 42L;
+        UnidadMedica domain = UnidadMedica.builder()
+                .id(id)
+                .nombre("HOSPITAL DE ESPECIALIDADES - CARLOS ANDRADE MARÍN")
+                .siglas("HCAM")
+                .nivel(2)
+                .latitud(-0.2051303)
+                .longitud(-78.5048297)
+                .status("A")
+                .createdBy("system")
+                .createdAt(LocalDateTime.of(2026, 1, 1, 0, 0))
                 .build();
 
+        UnidadMedicaResponse response = mapper.toResponse(domain);
+
+        assertThat(response.getId()).isEqualTo(id);
+        assertThat(response.getSiglas()).isEqualTo("HCAM");
+        assertThat(response.getLatitud()).isEqualTo(-0.2051303);
+        assertThat(response.getStatus()).isEqualTo("A");
+    }
+
+    @Test
+    void toPublicResponse_shouldMapDomainWithoutAudit() {
         UnidadMedica domain = UnidadMedica.builder()
+                .id(1L)
                 .nombre("Hospital Test")
                 .siglas("HT")
                 .nivel(1)
@@ -76,11 +83,10 @@ class UnidadMedicaMapperTest {
                 .status("A")
                 .build();
 
-        UnidadMedicaEntity entity = mapper.toEntity(domain, provincia);
+        UnidadMedicaPublicResponse response = mapper.toPublicResponse(domain);
 
-        assertThat(entity.getProvincia().getNomProvincia()).isEqualTo("PICHINCHA");
-        assertThat(entity.getNombre()).isEqualTo("Hospital Test");
-        assertThat(entity.getLatitud()).isEqualByComparingTo("-0.1");
-        assertThat(entity.getEstRegistro()).isEqualTo("A");
+        assertThat(response.getNombre()).isEqualTo("Hospital Test");
+        assertThat(response.getSiglas()).isEqualTo("HT");
+        assertThat(response.getNivel()).isEqualTo(1);
     }
 }

@@ -25,6 +25,10 @@ import java.util.Map;
 @Slf4j
 public class VaultEnvironmentPostProcessor implements EnvironmentPostProcessor {
 
+    private static final String LOCALHOST = "localhost";
+    private static final String KEY_USERNAME = "username";
+    private static final String KEY_PASSWORD = "password";
+
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
         String vaultEnabled = environment.getProperty("VAULT_ENABLED", "false");
@@ -32,7 +36,7 @@ public class VaultEnvironmentPostProcessor implements EnvironmentPostProcessor {
             return;
         }
 
-        String vaultHost = environment.getProperty("VAULT_HOST", "localhost");
+        String vaultHost = environment.getProperty("VAULT_HOST", LOCALHOST);
         String vaultPort = environment.getProperty("VAULT_PORT", "8200");
         String vaultScheme = environment.getProperty("VAULT_SCHEME", "http");
         String vaultToken = environment.getProperty("VAULT_TOKEN", "root-token");
@@ -49,38 +53,17 @@ public class VaultEnvironmentPostProcessor implements EnvironmentPostProcessor {
 
             Map<String, Object> secretos = new HashMap<>();
 
-            if ("postgres".equalsIgnoreCase(dbEngine)) {
-                leerSecreto(vaultTemplate, "BaseSpringApi/data/database/postgres",
-                        Map.of(
-                                "host", "DB_POSTGRES_HOST",
-                                "port", "DB_POSTGRES_PORT",
-                                "username", "DB_POSTGRES_USERNAME",
-                                "password", "DB_POSTGRES_PASSWORD",
-                                "bdd", "DB_POSTGRES_NAME"
-                        ), secretos);
-
-                String host = val(secretos, "DB_POSTGRES_HOST", "localhost");
-                String port = val(secretos, "DB_POSTGRES_PORT", "5432");
-                String bdd = val(secretos, "DB_POSTGRES_NAME", "iess_salud");
-                String user = val(secretos, "DB_POSTGRES_USERNAME", "iess_salud_user");
-                String pass = val(secretos, "DB_POSTGRES_PASSWORD", "");
-                secretos.put("spring.datasource.url",
-                        "jdbc:postgresql://" + host + ":" + port + "/" + bdd + "?currentSchema=salud");
-                secretos.put("spring.datasource.username", user);
-                secretos.put("spring.datasource.password", pass);
-            }
-
             if ("oracle".equalsIgnoreCase(dbEngine)) {
                 leerSecreto(vaultTemplate, "BaseSpringApi/data/database/oracle",
                         Map.of(
                                 "host", "DB_ORACLE_HOST",
                                 "port", "DB_ORACLE_PORT",
-                                "username", "DB_ORACLE_USERNAME",
-                                "password", "DB_ORACLE_PASSWORD",
+                                KEY_USERNAME, "DB_ORACLE_USERNAME",
+                                KEY_PASSWORD, "DB_ORACLE_PASSWORD",
                                 "service", "DB_ORACLE_SERVICE"
                         ), secretos);
 
-                String host = val(secretos, "DB_ORACLE_HOST", "localhost");
+                String host = val(secretos, "DB_ORACLE_HOST", LOCALHOST);
                 String port = val(secretos, "DB_ORACLE_PORT", "1521");
                 String service = val(secretos, "DB_ORACLE_SERVICE", "DBDVP");
                 String user = val(secretos, "DB_ORACLE_USERNAME", "DIRGEN_OWNER");
@@ -96,12 +79,12 @@ public class VaultEnvironmentPostProcessor implements EnvironmentPostProcessor {
                             "host", "DB_MONGO_HOST",
                             "port", "DB_MONGO_PORT",
                             "bdd", "DB_MONGO_NAME",
-                            "username", "DB_MONGO_USERNAME",
-                            "password", "DB_MONGO_PASSWORD",
+                            KEY_USERNAME, "DB_MONGO_USERNAME",
+                            KEY_PASSWORD, "DB_MONGO_PASSWORD",
                             "auth_db", "DB_MONGO_AUTH_DB"
                     ), secretos);
 
-            String mongoHost = val(secretos, "DB_MONGO_HOST", "localhost");
+            String mongoHost = val(secretos, "DB_MONGO_HOST", LOCALHOST);
             String mongoPort = val(secretos, "DB_MONGO_PORT", "27017");
             String mongoUser = val(secretos, "DB_MONGO_USERNAME", "mongo_user");
             String mongoPass = val(secretos, "DB_MONGO_PASSWORD", "mongo_password");

@@ -1,5 +1,5 @@
 # BaseSpringApi — configuración principal
-# Motor: DB_ENGINE=oracle | postgres | mock (ver .env.example)
+# Motor: DB_ENGINE=oracle | mock (ver .env.example)
 
 server:
   port: ${SERVER_PORT:8080}

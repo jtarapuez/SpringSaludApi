@@ -22,5 +22,6 @@ class BaseSpringApiApplicationTests {
 
     @Test
     void contextLoads() {
+        // Smoke test: Spring Boot context must start with profile "mock".
     }
 }

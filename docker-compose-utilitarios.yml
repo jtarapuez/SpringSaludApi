@@ -2,7 +2,8 @@
 #  BaseSpringApi - Ecosistema de servicios utilitarios
 #  PAS-EST-055 Etapa 2
 #
-#  Servicios: PostgreSQL, MongoDB, Vault, vault-init, MinIO
+#  Servicios: MongoDB, Vault, vault-init, MinIO
+#  (Oracle DBDVP es externo — no se levanta aquí)
 #
 #  Uso:
 #    Levantar todo:      docker-compose -f docker-compose-utilitarios.yml up -d
@@ -12,26 +13,6 @@
 # ============================================================
 
 services:
-
-  postgres:
-    image: postgres:16-alpine
-    container_name: base_spring_postgres
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: iess_salud
-      POSTGRES_USER: iess_salud_user
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - net
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U iess_salud_user -d iess_salud"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   mongo:
     image: mongo:7-jammy
@@ -119,8 +100,6 @@ networks:
     driver: bridge
 
 volumes:
-  postgres_data:
-    name: base_spring_postgres_data
   mongo_data:
     name: base_spring_mongo_data
   minio_data:

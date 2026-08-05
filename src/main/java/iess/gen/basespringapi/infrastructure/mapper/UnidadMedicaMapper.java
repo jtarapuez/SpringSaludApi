@@ -9,17 +9,14 @@ import iess.gen.basespringapi.infrastructure.controller.dto.ProvinciaUnidadesPub
 import iess.gen.basespringapi.infrastructure.controller.dto.UnidadMedicaPublicResponse;
 import iess.gen.basespringapi.infrastructure.controller.dto.UnidadMedicaRequest;
 import iess.gen.basespringapi.infrastructure.controller.dto.UnidadMedicaResponse;
-import iess.gen.basespringapi.infrastructure.persistence.jpa.ProvinciaEntity;
-import iess.gen.basespringapi.infrastructure.persistence.jpa.UnidadMedicaEntity;
 import iess.gen.basespringapi.model.UnidadMedica;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Mapper centralizado para conversiones de Unidad Médica.
+ * Mapper centralizado para conversiones de Unidad Médica (dominio ↔ DTO).
  *
  * @author Juan Pablo Tarapuez
  * @version Revision: 1.0
@@ -29,64 +26,6 @@ import java.util.List;
  */
 @Component
 public class UnidadMedicaMapper {
-
-    public UnidadMedica toDomain(UnidadMedicaEntity entity) {
-        if (entity == null) {
-            return null;
-        }
-
-        String provinciaNombre = entity.getProvincia() != null
-                ? entity.getProvincia().getNomProvincia()
-                : null;
-
-        return UnidadMedica.builder()
-                .id(entity.getId())
-                .nombre(entity.getNombre())
-                .nivel(entity.getNivel())
-                .latitud(toDouble(entity.getLatitud()))
-                .longitud(toDouble(entity.getLongitud()))
-                .descripcion(entity.getDescripcion())
-                .telefono(entity.getTelefono())
-                .sitioWeb(entity.getSitioWeb())
-                .siglas(entity.getSiglas())
-                .direccion(entity.getDireccion())
-                .provincia(provinciaNombre)
-                .status(entity.getEstRegistro())
-                .createdBy(entity.getUsuCreacion())
-                .createdAt(entity.getFecCreacion())
-                .updatedBy(entity.getUsuActualizacion())
-                .updatedAt(entity.getFecActualizacion())
-                .deletedBy(entity.getUsuEliminacion())
-                .deletedAt(entity.getFecEliminacion())
-                .build();
-    }
-
-    public UnidadMedicaEntity toEntity(UnidadMedica domain, ProvinciaEntity provincia) {
-        if (domain == null) {
-            return null;
-        }
-
-        return UnidadMedicaEntity.builder()
-                .id(domain.getId())
-                .provincia(provincia)
-                .nombre(domain.getNombre())
-                .nivel(domain.getNivel())
-                .latitud(toBigDecimal(domain.getLatitud()))
-                .longitud(toBigDecimal(domain.getLongitud()))
-                .descripcion(domain.getDescripcion())
-                .telefono(domain.getTelefono())
-                .sitioWeb(domain.getSitioWeb())
-                .siglas(domain.getSiglas())
-                .direccion(domain.getDireccion())
-                .estRegistro(domain.getStatus() != null ? domain.getStatus() : "A")
-                .usuCreacion(domain.getCreatedBy())
-                .fecCreacion(domain.getCreatedAt())
-                .usuActualizacion(domain.getUpdatedBy())
-                .fecActualizacion(domain.getUpdatedAt())
-                .usuEliminacion(domain.getDeletedBy())
-                .fecEliminacion(domain.getDeletedAt())
-                .build();
-    }
 
     public UnidadMedica toDomain(UnidadMedicaRequest request) {
         if (request == null) {
@@ -161,13 +100,5 @@ public class UnidadMedicaMapper {
                                 .toList())
                         .build())
                 .toList();
-    }
-
-    private Double toDouble(BigDecimal value) {
-        return value != null ? value.doubleValue() : null;
-    }
-
-    private BigDecimal toBigDecimal(Double value) {
-        return value != null ? BigDecimal.valueOf(value) : null;
     }
 }
