@@ -30,10 +30,16 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins(appProperties.getCors().getAllowedOrigins().toArray(String[]::new))
+                var cors = appProperties.getCors();
+                var mapping = registry.addMapping("/**")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
+
+                if (!cors.getAllowedOriginPatterns().isEmpty()) {
+                    mapping.allowedOriginPatterns(cors.getAllowedOriginPatterns().toArray(String[]::new));
+                } else if (!cors.getAllowedOrigins().isEmpty()) {
+                    mapping.allowedOrigins(cors.getAllowedOrigins().toArray(String[]::new));
+                }
             }
         };
     }

@@ -111,6 +111,18 @@ Unitarios y de controlador (perfil mock):
 mvn test
 ```
 
+## SonarQube (calidad de código)
+
+Servidor IESS: `http://192.168.111.89:9000`  
+Guía: [`docs/SONAR.md`](./docs/SONAR.md)
+
+```bash
+mvn clean test
+mvn sonar:sonar
+```
+
+Requiere profile `sonar` en `~/.m2/settings.xml` (URL + token; el token **no** va en el repo).
+
 ## Arquitectura (PAS-EST-055)
 
 Ver plan de alineación con plantilla: [`Documentacion/PLAN_ALINEACION_PAS-EST-055.md`](../Documentacion/PLAN_ALINEACION_PAS-EST-055.md)

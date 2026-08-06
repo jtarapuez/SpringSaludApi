@@ -39,5 +39,6 @@ public class AppProperties {
     @Setter
     public static class Cors {
         private List<String> allowedOrigins = List.of("http://localhost:4200");
+        private List<String> allowedOriginPatterns = List.of();
     }
 }

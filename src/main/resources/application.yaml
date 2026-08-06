@@ -33,9 +33,15 @@ app:
   data:
     json-path: classpath:data/unidades-medicas.json
   cors:
-    allowed-origins:
+    allowed-origin-patterns:
       - http://localhost:4200
       - http://127.0.0.1:4200
+      - http://localhost:8080
+      - http://127.0.0.1:8080
+      - http://192.168.*.*:4200
+      - http://192.168.*.*:8080
+      - http://10.*.*.*:4200
+      - http://10.*.*.*:8080
 
 springdoc:
   api-docs:

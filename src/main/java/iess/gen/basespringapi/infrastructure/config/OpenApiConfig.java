@@ -36,7 +36,8 @@ public class OpenApiConfig {
                                 .name("IESS - Equipo de Desarrollo")
                                 .email("desarrollo@iess.gob.ec")))
                 .servers(List.of(
-                        new Server().url("http://localhost:8080/api").description("Desarrollo local")
+                        new Server().url("/api").description("Servidor actual (mismo host/IP que Swagger)"),
+                        new Server().url("http://localhost:8080/api").description("Localhost explícito")
                 ));
     }
 }
