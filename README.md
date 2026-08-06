@@ -93,6 +93,13 @@ DB_ENGINE=mock mvn spring-boot:run
 
 Swagger UI: `http://localhost:8080/api/swagger-ui/index.html`
 
+### Acceso por IP (red LAN / simulación QA)
+
+- Swagger y API responden en `http://<ip-servidor>:8080/api/...`
+- En Swagger UI, servidor **Servers** → **"Servidor actual (mismo host/IP que Swagger)"** (`/api`)
+- CORS permite front en `http://192.168.*.*:4200` y `:8080`
+- Guía paso a calidad: [`Documentacion/calidad/Back/PASOS_CALIDAD.md`](../Documentacion/calidad/Back/PASOS_CALIDAD.md) §6
+
 ## Base de datos
 
 ### Oracle DBDVP (perfil `oracle`)
@@ -114,7 +121,7 @@ mvn test
 ## SonarQube (calidad de código)
 
 Servidor IESS: `http://192.168.111.89:9000`  
-Guía: [`docs/SONAR.md`](./docs/SONAR.md)
+Guía: [`Documentacion/SONAR_BASESPRINGAPI.md`](../Documentacion/SONAR_BASESPRINGAPI.md)
 
 ```bash
 mvn clean test
