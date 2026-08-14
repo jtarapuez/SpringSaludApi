@@ -11,7 +11,7 @@ spring:
       token: ${VAULT_TOKEN:root-token}
       kv:
         enabled: true
-        backend: BaseSpringApi
+        backend: salud-geolocalizacion-api
         default-context: ""
         application-name: ""
         profiles-path: ""

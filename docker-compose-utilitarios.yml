@@ -1,5 +1,5 @@
 # ============================================================
-#  BaseSpringApi - Ecosistema de servicios utilitarios
+#  salud-geolocalizacion-api - Ecosistema de servicios utilitarios
 #  PAS-EST-055 Etapa 2
 #
 #  Servicios: MongoDB, Vault, vault-init, MinIO
@@ -16,7 +16,7 @@ services:
 
   mongo:
     image: mongo:7-jammy
-    container_name: base_spring_mongo
+    container_name: salud_geolocalizacion_api_mongo
     restart: unless-stopped
     environment:
       MONGO_INITDB_ROOT_USERNAME: mongo_user
@@ -37,7 +37,7 @@ services:
 
   vault:
     image: hashicorp/vault:1.15
-    container_name: base_spring_vault
+    container_name: salud_geolocalizacion_api_vault
     restart: unless-stopped
     environment:
       VAULT_DEV_ROOT_TOKEN_ID: root-token
@@ -58,7 +58,7 @@ services:
 
   vault-init:
     image: hashicorp/vault:1.15
-    container_name: base_spring_vault_init
+    container_name: salud_geolocalizacion_api_vault_init
     restart: "no"
     environment:
       VAULT_ADDR: "http://vault:8200"
@@ -75,7 +75,7 @@ services:
 
   minio:
     image: minio/minio:RELEASE.2024-11-07T00-52-20Z
-    container_name: base_spring_minio
+    container_name: salud_geolocalizacion_api_minio
     restart: unless-stopped
     environment:
       MINIO_ROOT_USER: minioadmin
@@ -101,6 +101,6 @@ networks:
 
 volumes:
   mongo_data:
-    name: base_spring_mongo_data
+    name: salud_geolocalizacion_api_mongo_data
   minio_data:
-    name: base_spring_minio_data
+    name: salud_geolocalizacion_api_minio_data

@@ -1,4 +1,4 @@
-# BaseSpringApi — configuración principal
+# salud-geolocalizacion-api — configuración principal
 # Motor: DB_ENGINE=oracle | mock (ver .env.example)
 
 server:
@@ -8,7 +8,7 @@ server:
 
 spring:
   application:
-    name: BaseSpringApi
+    name: salud-geolocalizacion-api
   profiles:
     active: ${DB_ENGINE:oracle}
   autoconfigure:

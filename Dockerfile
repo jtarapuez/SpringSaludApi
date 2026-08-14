@@ -1,5 +1,5 @@
 # ============================================================
-#  BaseSpringApi - Dockerfile
+#  salud-geolocalizacion-api - Dockerfile
 #  PAS-EST-055 Etapa 2
 #
 #  Multi-stage build (sin mvnw — usa Maven del contenedor)
@@ -17,7 +17,7 @@ RUN mvn package -DskipTests -B
 
 FROM eclipse-temurin:21-jre-alpine AS runtime
 
-LABEL application="BaseSpringApi"
+LABEL application="salud-geolocalizacion-api"
 LABEL version="1.0.0"
 
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
@@ -26,7 +26,7 @@ WORKDIR /app
 
 RUN mkdir -p uploads && chown appuser:appgroup uploads
 
-COPY --from=builder /app/target/BaseSpringApi-1.0.0.jar app.jar
+COPY --from=builder /app/target/salud-geolocalizacion-api-1.0.0.jar app.jar
 
 USER appuser
 

@@ -1,5 +1,5 @@
 # ============================================================
-#  BaseSpringApi - Solo la aplicación (API)
+#  salud-geolocalizacion-api - Solo la aplicación (API)
 #
 #  Oracle DBDVP = externo (192.168.29.66) — no requiere utilitarios.
 #  Utilitarios (Vault, Postgres, Mongo, MinIO) = opcionales:
@@ -17,8 +17,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: base-spring-api:1.0.0
-    container_name: base_spring_app
+    image: salud-geolocalizacion-api:1.0.0
+    container_name: salud_geolocalizacion_api
     restart: unless-stopped
     env_file:
       - .env
@@ -35,4 +35,4 @@ services:
 
 volumes:
   app_uploads:
-    name: base_spring_uploads
+    name: salud_geolocalizacion_api_uploads

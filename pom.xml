@@ -9,10 +9,10 @@
         <relativePath/>
     </parent>
     <groupId>iess.gen</groupId>
-    <artifactId>BaseSpringApi</artifactId>
+    <artifactId>salud-geolocalizacion-api</artifactId>
     <version>1.0.0</version>
-    <name>BaseSpringApi</name>
-    <description>Proyecto Base API REST - Spring Boot para IESS</description>
+    <name>salud-geolocalizacion-api</name>
+    <description>API REST de geolocalización de unidades médicas IESS</description>
 
     <properties>
         <java.version>21</java.version>

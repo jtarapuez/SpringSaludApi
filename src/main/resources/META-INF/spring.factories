@@ -1,2 +1,2 @@
 org.springframework.boot.env.EnvironmentPostProcessor=\
-  iess.gen.basespringapi.infrastructure.config.VaultEnvironmentPostProcessor
+  iess.gen.saludgeolocalizacionapi.infrastructure.config.VaultEnvironmentPostProcessor
