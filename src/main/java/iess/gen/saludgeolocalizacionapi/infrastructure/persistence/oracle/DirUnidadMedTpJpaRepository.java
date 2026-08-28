@@ -13,7 +13,13 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Repositorio Spring Data JPA para DIR_UNIDADESMED_TP.
+ * <b> Repositorio Spring Data JPA para consultas sobre DIR_UNIDADESMED_TP. </b>
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ * <p>
+ * [Author: Juan Pablo Tarapuez , Date: 25 ago 2026]
+ * </p>
  */
 @Profile("oracle")
 public interface DirUnidadMedTpJpaRepository extends JpaRepository<DirUnidadMedTpEntity, Long> {

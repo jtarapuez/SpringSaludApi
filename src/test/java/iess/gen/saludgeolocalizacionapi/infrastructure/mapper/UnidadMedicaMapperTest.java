@@ -4,6 +4,7 @@
  */
 package iess.gen.saludgeolocalizacionapi.infrastructure.mapper;
 
+import iess.gen.saludgeolocalizacionapi.infrastructure.controller.dto.ProvinciaUnidadesPublicResponse;
 import iess.gen.saludgeolocalizacionapi.infrastructure.controller.dto.UnidadMedicaPublicResponse;
 import iess.gen.saludgeolocalizacionapi.infrastructure.controller.dto.UnidadMedicaRequest;
 import iess.gen.saludgeolocalizacionapi.infrastructure.controller.dto.UnidadMedicaResponse;
@@ -11,6 +12,7 @@ import iess.gen.saludgeolocalizacionapi.model.UnidadMedica;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -88,5 +90,34 @@ class UnidadMedicaMapperTest {
         assertThat(response.getNombre()).isEqualTo("Hospital Test");
         assertThat(response.getSiglas()).isEqualTo("HT");
         assertThat(response.getNivel()).isEqualTo(1);
+    }
+
+    @Test
+    void toPublicResponseList_shouldGroupByProvincia() {
+        List<ProvinciaUnidadesPublicResponse> result = mapper.toPublicResponseList(List.of(
+                sampleUnidad("HCAM", "PICHINCHA"),
+                sampleUnidad("HGSF", "PICHINCHA"),
+                sampleUnidad("HETMC", "GUAYAS")
+        ));
+
+        assertThat(result).hasSize(2);
+        assertThat(result.get(0).getProvincia()).isEqualTo("GUAYAS");
+        assertThat(result.get(1).getProvincia()).isEqualTo("PICHINCHA");
+        assertThat(result.get(1).getUnidades()).hasSize(2);
+        assertThat(result.get(1).getUnidades().get(0).getSiglas()).isEqualTo("HCAM");
+    }
+
+    @Test
+    void toPublicResponseList_shouldReturnEmptyWhenNull() {
+        assertThat(mapper.toPublicResponseList(null)).isEmpty();
+    }
+
+    private UnidadMedica sampleUnidad(String siglas, String provincia) {
+        return UnidadMedica.builder()
+                .siglas(siglas)
+                .nombre("Unidad " + siglas)
+                .provincia(provincia)
+                .nivel(2)
+                .build();
     }
 }

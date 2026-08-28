@@ -11,7 +11,13 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 /**
- * Mapeo entre DIR_UNIDADESMED_TP (Oracle) y el dominio UnidadMedica.
+ * <b> Mapeo entre la entidad Oracle DIR_UNIDADESMED_TP y el dominio UnidadMedica. </b>
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ * <p>
+ * [Author: Juan Pablo Tarapuez , Date: 25 ago 2026]
+ * </p>
  */
 @Component
 public class DirUnidadMedTpMapper {

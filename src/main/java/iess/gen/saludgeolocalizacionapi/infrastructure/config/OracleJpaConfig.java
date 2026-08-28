@@ -10,7 +10,13 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
- * JPA solo para entidades Oracle (DIR_UNIDADESMED_TP).
+ * <b> Configuración JPA exclusiva para entidades Oracle de DIR_UNIDADESMED_TP. </b>
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ * <p>
+ * [Author: Juan Pablo Tarapuez , Date: 25 ago 2026]
+ * </p>
  */
 @Configuration
 @Profile("oracle")

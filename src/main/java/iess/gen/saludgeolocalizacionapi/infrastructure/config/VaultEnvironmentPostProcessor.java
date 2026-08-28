@@ -19,8 +19,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Carga secretos desde HashiCorp Vault en la fase de bootstrap (PAS-EST-055).
+ * <b> Carga secretos desde HashiCorp Vault en la fase de bootstrap (PAS-EST-055). </b>
  * Solo activo cuando VAULT_ENABLED=true.
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ * <p>
+ * [Author: Juan Pablo Tarapuez , Date: 25 ago 2026]
+ * </p>
  */
 @Slf4j
 public class VaultEnvironmentPostProcessor implements EnvironmentPostProcessor {

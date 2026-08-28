@@ -19,7 +19,13 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Entidad JPA para DIRGEN_OWNER.DIR_UNIDADESMED_TP (Oracle DBDVP).
+ * <b> Entidad JPA para DIRGEN_OWNER.DIR_UNIDADESMED_TP (Oracle DBDVP). </b>
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ * <p>
+ * [Author: Juan Pablo Tarapuez , Date: 25 ago 2026]
+ * </p>
  */
 @Getter
 @Setter

@@ -4,7 +4,6 @@
  */
 package iess.gen.saludgeolocalizacionapi.application.usecase;
 
-import iess.gen.saludgeolocalizacionapi.application.dto.ProvinciaUnidadesAgrupada;
 import iess.gen.saludgeolocalizacionapi.application.port.UnidadMedicaRepositoryPort;
 import iess.gen.saludgeolocalizacionapi.model.UnidadMedica;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,20 +41,27 @@ class UnidadMedicaUseCaseTest {
     }
 
     @Test
-    void obtenerUnidadesAgrupadas_shouldGroupByProvincia() {
+    void obtenerUnidadesActivas_shouldReturnDomainList() {
         when(repository.findAllActive()).thenReturn(List.of(
                 sampleUnidad("HCAM", "PICHINCHA"),
-                sampleUnidad("HGSF", "PICHINCHA"),
                 sampleUnidad("HETMC", "GUAYAS")
         ));
 
-        List<ProvinciaUnidadesAgrupada> result = useCase.obtenerUnidadesAgrupadas();
+        List<UnidadMedica> result = useCase.obtenerUnidadesActivas();
 
         assertThat(result).hasSize(2);
-        assertThat(result.get(0).getProvincia()).isEqualTo("GUAYAS");
-        assertThat(result.get(1).getProvincia()).isEqualTo("PICHINCHA");
-        assertThat(result.get(1).getUnidades()).hasSize(2);
-        assertThat(result.get(1).getUnidades().get(0).getSiglas()).isEqualTo("HCAM");
+        assertThat(result).extracting(UnidadMedica::getSiglas).containsExactly("HCAM", "HETMC");
+    }
+
+    @Test
+    void buscarUnidades_shouldDelegateToRepository() {
+        when(repository.search("hospital", "PICHINCHA", 2))
+                .thenReturn(List.of(sampleUnidad("HCAM", "PICHINCHA")));
+
+        List<UnidadMedica> result = useCase.buscarUnidades("hospital", "PICHINCHA", 2);
+
+        assertThat(result).hasSize(1);
+        assertThat(result.get(0).getSiglas()).isEqualTo("HCAM");
     }
 
     @Test

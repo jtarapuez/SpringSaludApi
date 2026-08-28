@@ -4,16 +4,12 @@
  */
 package iess.gen.saludgeolocalizacionapi.application.usecase;
 
-import iess.gen.saludgeolocalizacionapi.application.dto.ProvinciaUnidadesAgrupada;
 import iess.gen.saludgeolocalizacionapi.application.port.UnidadMedicaRepositoryPort;
 import iess.gen.saludgeolocalizacionapi.model.UnidadMedica;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Caso de uso para gestionar la lógica de negocio de las Unidades Médicas.
@@ -30,12 +26,12 @@ public class UnidadMedicaUseCase {
 
     private final UnidadMedicaRepositoryPort repository;
 
-    public List<ProvinciaUnidadesAgrupada> obtenerUnidadesAgrupadas() {
-        return agruparPorProvincia(repository.findAllActive());
+    public List<UnidadMedica> obtenerUnidadesActivas() {
+        return repository.findAllActive();
     }
 
-    public List<ProvinciaUnidadesAgrupada> buscarUnidades(String termino, String provincia, Integer nivel) {
-        return agruparPorProvincia(repository.search(termino, provincia, nivel));
+    public List<UnidadMedica> buscarUnidades(String termino, String provincia, Integer nivel) {
+        return repository.search(termino, provincia, nivel);
     }
 
     public UnidadMedica buscarPorId(Long id) {
@@ -46,19 +42,5 @@ public class UnidadMedicaUseCase {
     public UnidadMedica buscarPorSiglas(String siglas) {
         return repository.findBySiglas(siglas)
                 .orElseThrow(() -> new IllegalArgumentException("No existe la unidad médica con siglas: " + siglas));
-    }
-
-    private List<ProvinciaUnidadesAgrupada> agruparPorProvincia(List<UnidadMedica> unidades) {
-        return unidades.stream()
-                .collect(Collectors.groupingBy(UnidadMedica::getProvincia))
-                .entrySet().stream()
-                .sorted(Comparator.comparing(Map.Entry::getKey))
-                .map(entry -> ProvinciaUnidadesAgrupada.builder()
-                        .provincia(entry.getKey())
-                        .unidades(entry.getValue().stream()
-                                .sorted(Comparator.comparing(UnidadMedica::getNombre))
-                                .toList())
-                        .build())
-                .toList();
     }
 }

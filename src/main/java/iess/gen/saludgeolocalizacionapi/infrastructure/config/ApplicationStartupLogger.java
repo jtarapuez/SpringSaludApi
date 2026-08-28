@@ -13,7 +13,13 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 /**
- * Imprime en el log un resumen de servicios al completar el arranque (PAS-EST-055 Anexo 3).
+ * <b> Imprime en el log un resumen de servicios al completar el arranque (PAS-EST-055 Anexo 3). </b>
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ * <p>
+ * [Author: Juan Pablo Tarapuez , Date: 25 ago 2026]
+ * </p>
  */
 @Slf4j
 @Component

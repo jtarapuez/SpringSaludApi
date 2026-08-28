@@ -161,7 +161,7 @@ Este caso de uso concentra la logica de aplicacion relacionada con unidades medi
 Metodos principales:
 
 ```text
-obtenerUnidadesAgrupadas()
+obtenerUnidadesActivas()
 buscarUnidades(String termino, String provincia, Integer nivel)
 buscarPorId(UUID id)
 buscarPorSiglas(String siglas)

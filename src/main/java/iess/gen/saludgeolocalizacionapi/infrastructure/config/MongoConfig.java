@@ -17,7 +17,13 @@ import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 /**
- * MongoDB para auditoría — solo cuando MONGO_ENABLED=true (PAS-EST-055 §17).
+ * <b> Configuración de MongoDB para auditoría, activa solo cuando MONGO_ENABLED=true (PAS-EST-055 §17). </b>
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ * <p>
+ * [Author: Juan Pablo Tarapuez , Date: 25 ago 2026]
+ * </p>
  */
 @Slf4j
 @Configuration

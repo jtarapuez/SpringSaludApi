@@ -17,7 +17,13 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Adaptador de persistencia Oracle (DIR_UNIDADESMED_TP @ DBDVP).
+ * <b> Adaptador de persistencia Oracle para DIR_UNIDADESMED_TP en DBDVP. </b>
+ *
+ * @author Juan Pablo Tarapuez
+ * @version Revision: 1.0
+ * <p>
+ * [Author: Juan Pablo Tarapuez , Date: 25 ago 2026]
+ * </p>
  */
 @Repository
 @Profile("oracle")

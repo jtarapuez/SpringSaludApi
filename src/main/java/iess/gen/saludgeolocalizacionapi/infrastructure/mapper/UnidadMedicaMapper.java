@@ -4,7 +4,6 @@
  */
 package iess.gen.saludgeolocalizacionapi.infrastructure.mapper;
 
-import iess.gen.saludgeolocalizacionapi.application.dto.ProvinciaUnidadesAgrupada;
 import iess.gen.saludgeolocalizacionapi.infrastructure.controller.dto.ProvinciaUnidadesPublicResponse;
 import iess.gen.saludgeolocalizacionapi.infrastructure.controller.dto.UnidadMedicaPublicResponse;
 import iess.gen.saludgeolocalizacionapi.infrastructure.controller.dto.UnidadMedicaRequest;
@@ -13,7 +12,10 @@ import iess.gen.saludgeolocalizacionapi.model.UnidadMedica;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Mapper centralizado para conversiones de Unidad Médica (dominio ↔ DTO).
@@ -88,14 +90,24 @@ public class UnidadMedicaMapper {
                 .build();
     }
 
-    public List<ProvinciaUnidadesPublicResponse> toPublicResponseList(List<ProvinciaUnidadesAgrupada> agrupadas) {
-        if (agrupadas == null) {
+    /**
+     * Agrupa unidades de dominio por provincia y las convierte al DTO REST público.
+     *
+     * @param unidades listado de dominio
+     * @return listado agrupado listo para el controlador
+     */
+    public List<ProvinciaUnidadesPublicResponse> toPublicResponseList(List<UnidadMedica> unidades) {
+        if (unidades == null || unidades.isEmpty()) {
             return List.of();
         }
-        return agrupadas.stream()
-                .map(agrupada -> ProvinciaUnidadesPublicResponse.builder()
-                        .provincia(agrupada.getProvincia())
-                        .unidades(agrupada.getUnidades().stream()
+        return unidades.stream()
+                .collect(Collectors.groupingBy(UnidadMedica::getProvincia))
+                .entrySet().stream()
+                .sorted(Comparator.comparing(Map.Entry::getKey))
+                .map(entry -> ProvinciaUnidadesPublicResponse.builder()
+                        .provincia(entry.getKey())
+                        .unidades(entry.getValue().stream()
+                                .sorted(Comparator.comparing(UnidadMedica::getNombre))
                                 .map(this::toPublicResponse)
                                 .toList())
                         .build())

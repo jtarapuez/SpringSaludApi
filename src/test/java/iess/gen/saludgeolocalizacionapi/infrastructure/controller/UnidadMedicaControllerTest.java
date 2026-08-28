@@ -4,7 +4,6 @@
  */
 package iess.gen.saludgeolocalizacionapi.infrastructure.controller;
 
-import iess.gen.saludgeolocalizacionapi.application.dto.ProvinciaUnidadesAgrupada;
 import iess.gen.saludgeolocalizacionapi.application.usecase.UnidadMedicaUseCase;
 import iess.gen.saludgeolocalizacionapi.infrastructure.mapper.UnidadMedicaMapper;
 import iess.gen.saludgeolocalizacionapi.model.UnidadMedica;
@@ -52,18 +51,14 @@ class UnidadMedicaControllerTest {
 
     @Test
     void listarAgrupadas_shouldReturnProvincias() throws Exception {
-        when(useCase.obtenerUnidadesAgrupadas()).thenReturn(List.of(
-                ProvinciaUnidadesAgrupada.builder()
+        when(useCase.obtenerUnidadesActivas()).thenReturn(List.of(
+                UnidadMedica.builder()
+                        .siglas("HCAM")
+                        .nombre("Hospital Carlos Andrade Marín")
                         .provincia("PICHINCHA")
-                        .unidades(List.of(
-                                UnidadMedica.builder()
-                                        .siglas("HCAM")
-                                        .nombre("Hospital Carlos Andrade Marín")
-                                        .nivel(2)
-                                        .latitud(-0.2051303)
-                                        .longitud(-78.5048297)
-                                        .build()
-                        ))
+                        .nivel(2)
+                        .latitud(-0.2051303)
+                        .longitud(-78.5048297)
                         .build()
         ));
 

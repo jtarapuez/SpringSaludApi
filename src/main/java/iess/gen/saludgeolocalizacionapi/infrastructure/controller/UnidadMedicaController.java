@@ -62,7 +62,7 @@ public class UnidadMedicaController {
         }
 
         log.info("REST Request - Listar unidades médicas agrupadas por provincia");
-        return ResponseEntity.ok(mapper.toPublicResponseList(useCase.obtenerUnidadesAgrupadas()));
+        return ResponseEntity.ok(mapper.toPublicResponseList(useCase.obtenerUnidadesActivas()));
     }
 
     @GetMapping("/buscar")
