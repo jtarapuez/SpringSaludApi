@@ -5,7 +5,7 @@ spring:
       on-profile: oracle
   datasource:
     url: jdbc:oracle:thin:@${DB_ORACLE_HOST:${DB_HOST:192.168.29.66}}:${DB_ORACLE_PORT:${DB_PORT:1521}}/${DB_ORACLE_SERVICE:${DB_SERVICE:DBDVP}}
-    username: ${DB_ORACLE_USERNAME:${DB_USER:DIRGEN_OWNER}}
+    username: ${DB_ORACLE_USERNAME:${DB_USER:DIRGEN_USR}}
     password: ${DB_ORACLE_PASSWORD:${DB_PASSWORD:}}
     driver-class-name: oracle.jdbc.OracleDriver
   jpa:
@@ -15,6 +15,6 @@ spring:
     show-sql: ${DB_ORACLE_SHOW_SQL:false}
     properties:
       hibernate:
-        default_schema: DIRGEN_OWNER
+        default_schema: ${DB_ORACLE_SCHEMA:DIRGEN_USR}
         dialect: org.hibernate.dialect.OracleDialect
         format_sql: true

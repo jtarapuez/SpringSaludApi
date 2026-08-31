@@ -14,7 +14,7 @@ API REST Spring Boot para el proyecto de salud IESS: unidades médicas, geolocal
 
 | Perfil | Uso |
 |--------|-----|
-| `oracle` | **Por defecto.** Conexión a Oracle DBDVP `DIRGEN_OWNER` (`DIR_UNIDADESMED_TP`) |
+| `oracle` | **Por defecto.** Conexión a Oracle DBDVP `DIRGEN_USR` (`DIR_UNIDADESMED_TP`) |
 | `mock` | Datos en memoria desde JSON (desarrollo/tests sin BD) |
 
 ## Configuración del entorno (PAS-EST-055)
@@ -106,8 +106,9 @@ Swagger UI: `http://localhost:8080/api/swagger-ui/index.html`
 
 ```
 jdbc:oracle:thin:@192.168.29.66:1521/DBDVP
-usuario: DIRGEN_OWNER
-tabla: DIR_UNIDADESMED_TP (101 unidades médicas)
+usuario: DIRGEN_USR
+tabla: DIR_UNIDADESMED_TP (103 unidades médicas)
+schema Hibernate: DIRGEN_USR (`DB_ORACLE_SCHEMA`)
 ```
 
 ## Tests

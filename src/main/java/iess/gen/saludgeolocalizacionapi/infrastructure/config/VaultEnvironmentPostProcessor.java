@@ -72,7 +72,7 @@ public class VaultEnvironmentPostProcessor implements EnvironmentPostProcessor {
                 String host = val(secretos, "DB_ORACLE_HOST", LOCALHOST);
                 String port = val(secretos, "DB_ORACLE_PORT", "1521");
                 String service = val(secretos, "DB_ORACLE_SERVICE", "DBDVP");
-                String user = val(secretos, "DB_ORACLE_USERNAME", "DIRGEN_OWNER");
+                String user = val(secretos, "DB_ORACLE_USERNAME", "DIRGEN_USR");
                 String pass = val(secretos, "DB_ORACLE_PASSWORD", "");
                 secretos.put("spring.datasource.url",
                         "jdbc:oracle:thin:@" + host + ":" + port + "/" + service);
