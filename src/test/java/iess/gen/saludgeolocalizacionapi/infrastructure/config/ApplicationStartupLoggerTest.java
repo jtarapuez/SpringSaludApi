@@ -13,13 +13,13 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 class ApplicationStartupLoggerTest {
 
     @Test
-    void logResumenArranque_withMockProfile_shouldNotThrow() {
+    void logStartupSummary_withMockProfile_shouldNotThrow() {
         ApplicationStartupLogger logger = createLogger(new MockEnvironment());
         assertThatCode(logger::logResumenArranque).doesNotThrowAnyException();
     }
 
     @Test
-    void logResumenArranque_withOracleProfile_shouldNotThrow() {
+    void logStartupSummary_withOracleProfile_shouldNotThrow() {
         MockEnvironment environment = new MockEnvironment();
         environment.setActiveProfiles("oracle");
 
@@ -33,7 +33,7 @@ class ApplicationStartupLoggerTest {
     }
 
     @Test
-    void logResumenArranque_withVaultEnabled_shouldNotThrow() {
+    void logStartupSummary_withVaultEnabled_shouldNotThrow() {
         ApplicationStartupLogger logger = createLogger(new MockEnvironment());
         ReflectionTestUtils.setField(logger, "vaultEnabled", true);
         ReflectionTestUtils.setField(logger, "vaultHost", "10.0.0.5");
@@ -44,7 +44,7 @@ class ApplicationStartupLoggerTest {
     }
 
     @Test
-    void logResumenArranque_withLocalVault_shouldNotThrow() {
+    void logStartupSummary_withLocalVault_shouldNotThrow() {
         ApplicationStartupLogger logger = createLogger(new MockEnvironment());
         ReflectionTestUtils.setField(logger, "vaultEnabled", true);
         ReflectionTestUtils.setField(logger, "vaultHost", "localhost");

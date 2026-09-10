@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
 /**
- * Cobertura unitaria de {@link VaultEnvironmentPostProcessor} (Sonar New Code).
+ * Unit coverage for {@link VaultEnvironmentPostProcessor} (Sonar New Code).
  */
 class VaultEnvironmentPostProcessorTest {
 
@@ -42,7 +42,7 @@ class VaultEnvironmentPostProcessorTest {
         assertThatCode(() -> processor.postProcessEnvironment(environment, application))
                 .doesNotThrowAnyException();
 
-        // leerSecreto captura errores; el processor aún puede registrar defaults en vault-secrets
+        // readSecret swallows errors; processor may still register defaults in vault-secrets
         assertThat(environment.getProperty("spring.datasource.url"))
                 .isEqualTo("jdbc:oracle:thin:@localhost:1521/DBDVP");
     }

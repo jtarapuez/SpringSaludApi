@@ -93,7 +93,7 @@ class UnidadMedicaMapperTest {
     }
 
     @Test
-    void toPublicResponseList_shouldGroupByProvincia() {
+    void toPublicResponseList_shouldGroupByProvince() {
         List<ProvinciaUnidadesPublicResponse> result = mapper.toPublicResponseList(List.of(
                 sampleUnidad("HCAM", "PICHINCHA"),
                 sampleUnidad("HGSF", "PICHINCHA"),

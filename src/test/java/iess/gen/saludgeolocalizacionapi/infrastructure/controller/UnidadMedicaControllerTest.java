@@ -50,7 +50,7 @@ class UnidadMedicaControllerTest {
     }
 
     @Test
-    void listarAgrupadas_shouldReturnProvincias() throws Exception {
+    void listGroupedByProvince_shouldReturnProvinces() throws Exception {
         when(useCase.obtenerUnidadesActivas()).thenReturn(List.of(
                 UnidadMedica.builder()
                         .siglas("HCAM")
@@ -69,7 +69,7 @@ class UnidadMedicaControllerTest {
     }
 
     @Test
-    void buscar_shouldApplyFilters() throws Exception {
+    void search_shouldApplyFilters() throws Exception {
         when(useCase.buscarUnidades(eq("hospital"), eq("PICHINCHA"), eq(2)))
                 .thenReturn(List.of());
 
@@ -81,7 +81,7 @@ class UnidadMedicaControllerTest {
     }
 
     @Test
-    void buscarPorSiglas_shouldReturnUnidad() throws Exception {
+    void searchByAcronym_shouldReturnUnit() throws Exception {
         when(useCase.buscarPorSiglas("HCAM")).thenReturn(
                 UnidadMedica.builder()
                         .id(1L)
@@ -97,7 +97,7 @@ class UnidadMedicaControllerTest {
     }
 
     @Test
-    void buscarPorId_shouldReturnUnidad() throws Exception {
+    void searchById_shouldReturnUnit() throws Exception {
         Long id = 1L;
         when(useCase.buscarPorId(id)).thenReturn(
                 UnidadMedica.builder()

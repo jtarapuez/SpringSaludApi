@@ -77,7 +77,7 @@ class UnidadMedicaOracleRepositoryTest {
     }
 
     @Test
-    void search_shouldFilterByProvincia() {
+    void search_shouldFilterByProvince() {
         when(jpaRepository.searchActive(eq("hospital"), eq(null), eq(null), eq(null)))
                 .thenReturn(List.of(
                         sampleEntity(1L, "HCAM", "PICHINCHA"),

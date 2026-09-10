@@ -51,7 +51,7 @@ class DirUnidadMedTpMapperTest {
     }
 
     @Test
-    void toDomain_shouldHandleNullAndInvalidNivel() {
+    void toDomain_shouldHandleNullAndInvalidLevel() {
         assertThat(mapper.toDomain(null)).isNull();
 
         UnidadMedica domain = mapper.toDomain(DirUnidadMedTpEntity.builder()

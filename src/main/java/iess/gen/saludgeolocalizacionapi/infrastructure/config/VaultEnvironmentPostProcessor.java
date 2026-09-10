@@ -66,7 +66,8 @@ public class VaultEnvironmentPostProcessor implements EnvironmentPostProcessor {
                                 "port", "DB_ORACLE_PORT",
                                 KEY_USERNAME, "DB_ORACLE_USERNAME",
                                 KEY_PASSWORD, "DB_ORACLE_PASSWORD",
-                                "service", "DB_ORACLE_SERVICE"
+                                "service", "DB_ORACLE_SERVICE",
+                                "schema", "DB_ORACLE_SCHEMA"
                         ), secretos);
 
                 String host = val(secretos, "DB_ORACLE_HOST", LOCALHOST);

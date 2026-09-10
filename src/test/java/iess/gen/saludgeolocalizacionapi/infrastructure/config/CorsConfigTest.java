@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Cobertura de {@link CorsConfig} — patrones LAN y fallback a orígenes fijos.
+ * Coverage for {@link CorsConfig} — LAN patterns and fixed-origin fallback.
  */
 @SpringBootTest
 @AutoConfigureMockMvc

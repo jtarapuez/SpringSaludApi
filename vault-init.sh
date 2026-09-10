@@ -23,9 +23,10 @@ vault secrets enable -path=salud-geolocalizacion-api kv-v2 2>/dev/null || echo '
 vault kv put salud-geolocalizacion-api/database/oracle \
   host=192.168.29.66 \
   port=1521 \
-  username=DIRGEN_OWNER \
+  username=DIRGEN_USR \
   password=pruebas \
-  service=DBDVP
+  service=DBDVP \
+  schema=DIRGEN_USR
 echo '[OK] salud-geolocalizacion-api/database/oracle'
 
 # ── MongoDB ───────────────────────────────────────────────────

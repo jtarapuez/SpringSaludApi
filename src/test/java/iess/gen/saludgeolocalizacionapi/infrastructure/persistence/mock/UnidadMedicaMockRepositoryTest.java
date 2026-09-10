@@ -39,7 +39,7 @@ class UnidadMedicaMockRepositoryTest {
     }
 
     @Test
-    void search_shouldFilterByTerminoProvinciaAndNivel() {
+    void search_shouldFilterByTermProvinceAndLevel() {
         UnidadMedica sample = repository.findAllActive().getFirst();
 
         List<UnidadMedica> byProvincia = repository.search(null, sample.getProvincia(), null);

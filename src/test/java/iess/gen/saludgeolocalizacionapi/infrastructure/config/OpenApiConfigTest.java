@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Cobertura de {@link OpenApiConfig} — servidor relativo para acceso por IP.
+ * Coverage for {@link OpenApiConfig} — relative server for IP access.
  */
 class OpenApiConfigTest {
 

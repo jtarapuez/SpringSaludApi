@@ -37,6 +37,7 @@ cp .env.example .env
 |----------|-------------|
 | `VAULT_ENABLED` | `true` para cargar secretos desde HashiCorp Vault |
 | `VAULT_HOST`, `VAULT_PORT`, `VAULT_TOKEN` | Conexión Vault local (`root-token` en dev) |
+| Calidad / Producción | Plantillas: `.env.qa.example`, `.env.prod.example`, `config/vault/` |
 | `MONGO_ENABLED` | `true` para auditoría Mongo (Etapa 3) |
 
 **Utilitarios locales (Mongo, Vault, MinIO):**

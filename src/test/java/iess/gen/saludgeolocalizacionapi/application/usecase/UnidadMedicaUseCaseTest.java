@@ -41,7 +41,7 @@ class UnidadMedicaUseCaseTest {
     }
 
     @Test
-    void obtenerUnidadesActivas_shouldReturnDomainList() {
+    void getActiveUnits_shouldReturnDomainList() {
         when(repository.findAllActive()).thenReturn(List.of(
                 sampleUnidad("HCAM", "PICHINCHA"),
                 sampleUnidad("HETMC", "GUAYAS")
@@ -54,7 +54,7 @@ class UnidadMedicaUseCaseTest {
     }
 
     @Test
-    void buscarUnidades_shouldDelegateToRepository() {
+    void searchUnits_shouldDelegateToRepository() {
         when(repository.search("hospital", "PICHINCHA", 2))
                 .thenReturn(List.of(sampleUnidad("HCAM", "PICHINCHA")));
 
@@ -65,7 +65,7 @@ class UnidadMedicaUseCaseTest {
     }
 
     @Test
-    void buscarPorSiglas_shouldReturnDomainEntity() {
+    void searchByAcronym_shouldReturnDomainEntity() {
         UnidadMedica unidad = sampleUnidad("HCAM", "PICHINCHA");
         when(repository.findBySiglas("HCAM")).thenReturn(Optional.of(unidad));
 
@@ -76,7 +76,7 @@ class UnidadMedicaUseCaseTest {
     }
 
     @Test
-    void buscarPorId_shouldThrowWhenNotFound() {
+    void searchById_shouldThrowWhenNotFound() {
         Long id = 99L;
         when(repository.findById(id)).thenReturn(Optional.empty());
 
