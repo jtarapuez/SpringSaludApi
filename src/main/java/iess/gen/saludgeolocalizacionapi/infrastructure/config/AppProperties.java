@@ -2,6 +2,7 @@
  * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
  * Todos los derechos reservados.
  */
+
 package iess.gen.saludgeolocalizacionapi.infrastructure.config;
 
 import lombok.Getter;
@@ -24,6 +25,7 @@ import java.util.List;
 @Setter
 @Configuration
 @ConfigurationProperties(prefix = "app")
+@SuppressWarnings("checkstyle:WriteTag")
 public class AppProperties {
 
     private Data data = new Data();

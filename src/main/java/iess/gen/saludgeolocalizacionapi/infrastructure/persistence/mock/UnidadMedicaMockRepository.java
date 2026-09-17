@@ -2,6 +2,7 @@
  * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
  * Todos los derechos reservados.
  */
+
 package iess.gen.saludgeolocalizacionapi.infrastructure.persistence.mock;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -64,7 +65,7 @@ public class UnidadMedicaMockRepository implements UnidadMedicaRepositoryPort {
         try (InputStream inputStream = resource.getInputStream()) {
             List<Map<String, Object>> provinciasList = objectMapper.readValue(
                     inputStream,
-                    new TypeReference<List<Map<String, Object>>>() {}
+                    new TypeReference<List<Map<String, Object>>>() { }
             );
 
             int totalCargadas = 0;

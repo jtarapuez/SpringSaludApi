@@ -37,8 +37,7 @@ cp .env.example .env
 |----------|-------------|
 | `VAULT_ENABLED` | `true` para cargar secretos desde HashiCorp Vault |
 | `VAULT_HOST`, `VAULT_PORT`, `VAULT_TOKEN` | Conexión Vault local (`root-token` en dev) |
-| Calidad / Producción | Plantillas: `.env.qa.example`, `.env.prod.example`, `config/vault/` |
-| `MONGO_ENABLED` | `true` para auditoría Mongo (Etapa 3) |
+| Calidad / Producción | Plantillas: `.env.qa.example`, `.env.prod.example` |
 
 **Utilitarios locales (Mongo, Vault, MinIO):**
 
@@ -109,7 +108,7 @@ Swagger UI: `http://localhost:8080/api/swagger-ui/index.html`
 jdbc:oracle:thin:@192.168.29.66:1521/DBDVP
 usuario: DIRGEN_USR
 tabla: DIR_UNIDADESMED_TP (103 unidades médicas)
-schema Hibernate: DIRGEN_USR (`DB_ORACLE_SCHEMA`)
+schema Hibernate: DIRGEN_USR (default en `application-oracle.yaml`; `DB_ORACLE_SCHEMA` en `.env` es **opcional** si coincide con el usuario)
 ```
 
 ## Tests

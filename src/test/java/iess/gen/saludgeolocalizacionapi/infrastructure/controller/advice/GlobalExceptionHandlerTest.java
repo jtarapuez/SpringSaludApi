@@ -2,6 +2,7 @@
  * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
  * Todos los derechos reservados.
  */
+
 package iess.gen.saludgeolocalizacionapi.infrastructure.controller.advice;
 
 import org.junit.jupiter.api.BeforeEach;

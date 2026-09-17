@@ -2,6 +2,7 @@
  * Copyright 2026 INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL - ECUADOR.
  * Todos los derechos reservados.
  */
+
 package iess.gen.saludgeolocalizacionapi;
 
 import org.springframework.boot.SpringApplication;
@@ -19,6 +20,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
  */
 @SpringBootApplication
 @EntityScan(basePackages = "iess.gen.saludgeolocalizacionapi.infrastructure.persistence.placeholder")
+@SuppressWarnings("checkstyle:HideUtilityClassConstructor")
 public class SaludGeolocalizacionApiApplication {
 
     public static void main(String[] args) {
